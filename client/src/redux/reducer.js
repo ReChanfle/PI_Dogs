@@ -14,6 +14,7 @@ const reducer = (state = initialState, action) => {
             default:
             return state; 
             case ADD_NICKNAME:
+                console.log(action.payload);
                 return{
                     ...state,
                     nickname:action.payload
