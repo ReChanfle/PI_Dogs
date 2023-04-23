@@ -1,0 +1,15 @@
+@media screen and (min-width: 40em) {
+    .cards {
+      
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+}
+
+
+.custom-select {
+    position: relative;
+    font-family: sans-serif;
+    font-weight: 600;
+  }

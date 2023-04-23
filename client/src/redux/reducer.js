@@ -1,8 +1,10 @@
-import { ADD_NICKNAME } from "./action-types";
+import { act } from "react-dom/test-utils";
+import { ADD_NICKNAME,GET_DATA } from "./action-types";
 
 
 const initialState = {
    nickname: '',
+   dogs:[]
    
   };
 
@@ -14,12 +16,15 @@ const reducer = (state = initialState, action) => {
             default:
             return state; 
             case ADD_NICKNAME:
-                console.log(action.payload);
                 return{
                     ...state,
                     nickname:action.payload
                 }
-
+            case GET_DATA:
+                return{
+                    ...state,
+                    dogs : action.payload
+                }
 
         }
     

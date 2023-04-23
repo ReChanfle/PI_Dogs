@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import '../styles/Nav.css';
 
-function Nav({onSearch,logOut,access}) {
+function Nav({onSearch,logOut}) {
 
     
     
@@ -71,7 +71,7 @@ function Nav({onSearch,logOut,access}) {
     </ul>
   </nav> */
 
-  <div class="topnav " id="myTopnav" >
+  <div className="topnav " id="myTopnav" >
    
     <Link   to="/home">Home</Link>
 
@@ -85,8 +85,8 @@ function Nav({onSearch,logOut,access}) {
 
     <a onClick={handleSubmit}>Logout</a>
     
-    <a class="icon" onClick={responsiveNav}>
-    <i class="fa fa-bars"></i>
+    <a className="icon" onClick={responsiveNav}>
+    <i className="fa fa-bars"></i>
     </a>
   </div>
   

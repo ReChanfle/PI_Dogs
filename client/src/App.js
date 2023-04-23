@@ -4,17 +4,41 @@ import React, { useState,useEffect } from 'react';
 import { Route,Routes } from 'react-router-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Form from './components/Form';
-import Nav from './components/Nav'
+import Nav from './components/Nav';
+import About from './components/About';
+import Card from './components/Card';
+import Cards from './components/Cards';
+import Error from './components/Error';
 import { useDispatch, useSelector } from 'react-redux';
+import { getDogs } from './redux/actions';
 
 
 function App() {
+
+
+  const dispatch = useDispatch();
+
+
+  useEffect(()=>{
+
+      dispatch(getDogs());
+
+  },[])
+
+
 
   const [access, setAccess] = useState(false);
 
   const user = useSelector((state)=>
     state.nickname
   ) 
+
+  const dogs = useSelector((state)=>
+    state.dogs
+  )
+
+
+    console.log(dogs.map((d)=> console.log(d)));
 
   const navigate = useNavigate();
 
@@ -38,18 +62,27 @@ function App() {
      setAccess(access);
   }
    
-  
+  function onClose()
+  {
+
+  }
   
 
 
   return (
     <div className="App">
+          {access ? <Nav  logOut={logOut} /> : null }
       <Routes>
              <Route path="/" element={<Form login={login} />}/>
-             <Route path="/home" element={<Nav logOut={logOut}/>}/>
+             <Route path="/about" element={<About />}/>
+             <Route path="/home" element={ <Cards  dogs={dogs} onClose={onClose}/>}/>
       </Routes>
     </div>
   );
 }
 
 export default App;
+
+/* 
+ <Route path="*" element={<Error />} />
+ */
