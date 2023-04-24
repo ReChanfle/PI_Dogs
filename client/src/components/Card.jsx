@@ -14,15 +14,15 @@ export default function Card({d}){
     }
            
         return(
-            <div class="container" >
-            <div class="wrapper" >
-               <div class="banner-image"> 
+            <div className="container" >
+            <div className="wrapper" >
+               <div className="banner-image"> 
               <img src={d.url} style={styleImg} alt='img_profile' /> 
                </div>
                 <h1>{d.height}</h1>
                   <p>{d.width}</p>
                 </div>
-            <div class="button-wrapper"> 
+            <div className="button-wrapper"> 
            
           
             

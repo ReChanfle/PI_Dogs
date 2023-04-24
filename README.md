@@ -205,12 +205,12 @@ Se debe desarrollar una aplicación utilizando **React** y **Redux** que conteng
 
 **📍 DETAIL PAGE |** en esta vista se deberá mostrar toda la información específica de un perro:
 
--  ID.
--  Imagen.
--  Nombre.
--  Altura.
--  Peso.
--  Temperamentos.
+-  ID. 
+-  Imagen. 
+-  Nombre. 
+-  Altura. 
+-  Peso. 
+-  Temperamentos. 
 -  Años de vida.
 
 <br />

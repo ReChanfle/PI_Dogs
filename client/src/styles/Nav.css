@@ -45,13 +45,13 @@
   
   
   .topnav a:hover {
-    background-color: #96f798;
+    background-color: #9378fe;
     color: black;
   }
   
   .topnav a.active {
     background-color: #04AA6D;
-    color: rgb(132, 251, 138);
+    color: #9378fe;
   }
   
   .topnav .icon {

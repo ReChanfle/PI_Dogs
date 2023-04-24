@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import '../styles/Nav.css';
 
 function Nav({onSearch,logOut}) {
 
     
-    
+        const user = useSelector((state)=> state.nickname);
      
         function handleSubmit(event)
         {
@@ -83,7 +84,7 @@ function Nav({onSearch,logOut}) {
 
     
 
-    <a onClick={handleSubmit}>Logout</a>
+    <a onClick={handleSubmit}>{user}</a>
     
     <a className="icon" onClick={responsiveNav}>
     <i className="fa fa-bars"></i>

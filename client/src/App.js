@@ -15,17 +15,13 @@ import { getDogs } from './redux/actions';
 
 function App() {
 
-
   const dispatch = useDispatch();
 
-
   useEffect(()=>{
-
+    document.title = 'PI-Dogs';
       dispatch(getDogs());
 
   },[])
-
-
 
   const [access, setAccess] = useState(false);
 
@@ -36,9 +32,6 @@ function App() {
   const dogs = useSelector((state)=>
     state.dogs
   )
-
-
-    console.log(dogs.map((d)=> console.log(d)));
 
   const navigate = useNavigate();
 
@@ -67,13 +60,11 @@ function App() {
 
   }
   
-
-
   return (
     <div className="App">
           {access ? <Nav  logOut={logOut} /> : null }
       <Routes>
-             <Route path="/" element={<Form login={login} />}/>
+             <Route path="/" element={<Form login={login}  />}/>
              <Route path="/about" element={<About />}/>
              <Route path="/home" element={ <Cards  dogs={dogs} onClose={onClose}/>}/>
       </Routes>

@@ -33,24 +33,25 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 });
 
 
-server.get('/dogs',(req,res)=>{
+/*server.get('/dogs',(req,res)=>{
 
 });
 
 server.get('/dogs/:idRaza',(req,res)=>{
 
 });
-//Esta ruta debe obtener todas aquellas razas de perros que coinciden con el nombre recibido por query.
+//Esta ruta debe obtener todas aquellas razas de perros que coinciden con el nombre recibido por query. 
 server.post('/dogs/',(req,res)=>{
 
 });
 
+//createDogs
 server.post('/dogs',(req,res)=>{
 
 });
 
 server.get('/temperaments',(req,res)=>{
 
-});
+}); */
 
 module.exports = server;
