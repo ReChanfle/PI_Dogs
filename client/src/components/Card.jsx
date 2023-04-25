@@ -1,5 +1,5 @@
 import '../styles/Card.css'
-
+import { Link } from "react-router-dom";
 
 
 export default function Card({d}){
@@ -12,21 +12,26 @@ export default function Card({d}){
 
 
     }
-           
+         
         return(
             <div className="container" >
             <div className="wrapper" >
                <div className="banner-image"> 
-              <img src={d.url} style={styleImg} alt='img_profile' /> 
+              <img src={d.img} style={styleImg} alt='img_profile' /> 
                </div>
-                <h1>{d.height}</h1>
-                  <p>{d.width}</p>
+                <h1>{d.name}</h1>
+                  <p>{d.temperament}</p>
+                  <p>{d.weight}</p>
                 </div>
             <div className="button-wrapper"> 
-           
+                    <Link to={`/dogs/${d.id}`}>
+                      <button class="btn outline">Details</button>
+                    </Link>
+                
+            </div>
           
             
-            </div>
+           
          </div>
 
         )

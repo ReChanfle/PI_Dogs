@@ -6,19 +6,21 @@ async function getDogById(req,res){
 
     const {idRaza} = req.params;
     console.log(idRaza);
-    const response = await fetch(`${URL}+${idRaza}`);
+    const responseApi = await fetch(`${URL}+${idRaza}`);
 
-    const responseJson = await response.json();
+    const responseJson = await responseApi.json();
     try{
-        let data  = responseJson;
+        
 
-       if(data)
+       if(responseJson)
         {
             var obj = {
-                id: data.id,
-                breed: data.name
+                origin:responseJson.origin,
+                bred_for:responseJson.bred_for,
+                bred_group:responseJson.breed_group,
+                lifespan:responseJson.life_span
             }
-             res.status(200).json(responseJson);
+             res.status(200).json(obj);
         }
 
     }

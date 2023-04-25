@@ -1,12 +1,12 @@
-import { ADD_NICKNAME,GET_DATA } from "./action-types";
+import { ADD_NICKNAME,GET_DATA,GET_ID } from "./action-types";
 
 
-
+//rehacer con el back 
 export const getDogs=()=>{
 
     return async function (dispatch)
     {
-      const response = await fetch(`https://api.thedogapi.com/v1/images/search?limit=10`);
+      const response = await fetch(`http://localhost:3001/dogs`);
       
       const responsJson = await response.json();
 
@@ -20,6 +20,26 @@ export const getDogs=()=>{
       }
     }
 
+
+}
+
+export const getDogsById=(id)=>{
+
+  return async function (dispatch)
+  {
+    const response = await fetch(`http://localhost:3001/dogs/${id}`);
+    
+    const responsJson = await response.json();
+
+    try{
+     
+      dispatch({type: GET_ID,payload:responsJson});
+    }
+    catch(err)
+    {
+      console.log(err.message);
+    }
+  }
 
 }
 

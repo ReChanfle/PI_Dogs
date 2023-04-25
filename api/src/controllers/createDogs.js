@@ -1,7 +1,7 @@
 
 async function createDogs(req,res){
 
-    
+        
 
     
    /*"id": 2,
@@ -11,13 +11,16 @@ async function createDogs(req,res){
   "life_span": "10 to 13 years",
   "bred_for": "Coursing and hunting",
    */
+//pasar a la db y crear registro en tabla
+
+
 
 
     const {id,name,weight,height,life_span,bred_for} = req.body;
 
     console.log(id,name,weight,height,life_span,bred_for);
 
-    res.status(200).json({id,name,weight,height,life_span,bred_for});
+   // res.status(200).json({id,name,weight,height,life_span,bred_for});
 
 
 

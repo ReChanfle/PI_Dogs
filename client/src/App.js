@@ -8,7 +8,7 @@ import Nav from './components/Nav';
 import About from './components/About';
 import Card from './components/Card';
 import Cards from './components/Cards';
-import Error from './components/Error';
+import Detail from './components/Detail';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDogs } from './redux/actions';
 
@@ -32,6 +32,9 @@ function App() {
   const dogs = useSelector((state)=>
     state.dogs
   )
+
+  
+
 
   const navigate = useNavigate();
 
@@ -67,6 +70,7 @@ function App() {
              <Route path="/" element={<Form login={login}  />}/>
              <Route path="/about" element={<About />}/>
              <Route path="/home" element={ <Cards  dogs={dogs} onClose={onClose}/>}/>
+             <Route path="/dogs/:id" element={ <Detail />}/>
       </Routes>
     </div>
   );

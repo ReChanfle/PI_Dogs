@@ -1,24 +1,27 @@
+const { Temperaments } = require('../db');
 
 
-const URL = `https://api.thedogapi.com/v1/breeds?limit=10&page=0`;
+const URL = `https://api.thedogapi.com/v1/breeds`;
 
  async function getDogs(req,res){
 
-   
+    const responseApi = await fetch(`${URL}`);
 
-    const response = await fetch(`${URL}`);
+    const responseDb = await Temperaments.findAll();
 
-    const responseJson = await response.json();
+    const responseJson = await responseApi.json();
     try{
-        let data  = responseJson;
-
-       if(data)
+        
+    let arrReponseFront = []
+       if(responseJson)
         {
-            var obj = {
-                id: data.id,
-                breed: data.name
-            }
-             res.status(200).json(responseJson);
+           responseJson.forEach(dog => {
+            
+                arrReponseFront.push({id: dog.id,img:dog.image.url,name: dog.name,temperament: dog.temperament, weight: dog.weight.metric})
+
+           });
+
+             res.status(200).json(arrReponseFront);
         }
 
     }

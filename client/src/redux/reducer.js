@@ -1,10 +1,11 @@
 import { act } from "react-dom/test-utils";
-import { ADD_NICKNAME,GET_DATA } from "./action-types";
+import { ADD_NICKNAME,GET_DATA, GET_ID } from "./action-types";
 
 
 const initialState = {
    nickname: '',
-   dogs:[]
+   dogs:[],
+   detail:{}
    
   };
 
@@ -24,6 +25,11 @@ const reducer = (state = initialState, action) => {
                 return{
                     ...state,
                     dogs : action.payload
+                }
+            case GET_ID:
+                return{
+                    ...state,
+                    detail:action.payload
                 }
 
         }

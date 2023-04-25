@@ -12,7 +12,7 @@ const router = Router();
 
 
 
-router.get('/dogs', getDogs);
+router.get('/dogs',  getDogs);
 
 router.get('/dogs/:idRaza', getDogById);
 //Esta ruta debe obtener todas aquellas razas de perros que coinciden con el nombre recibido por query.
@@ -20,7 +20,7 @@ router.post('/dogs/',getDogsByBreed);
 //createDogs
 router.post('/dogs/create',createDogs);
 
-router.get('/temperaments', geTemperaments);
+router.get('/', geTemperaments);
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
