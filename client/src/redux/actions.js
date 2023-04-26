@@ -1,4 +1,4 @@
-import { ADD_NICKNAME,GET_DATA,GET_ID } from "./action-types";
+import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS } from "./action-types";
 
 
 //rehacer con el back 
@@ -19,6 +19,26 @@ export const getDogs=()=>{
         console.log(err.message);
       }
     }
+
+
+}
+export const get_temperament=()=>{
+
+  return async function (dispatch)
+  {
+    const response = await fetch(`http://localhost:3001/temperaments`);
+    
+    const responsJson = await response.json();
+
+    try{
+     
+      dispatch({type: GET_TEMPERAMENTS,payload:responsJson});
+    }
+    catch(err)
+    {
+      console.log(err.message);
+    }
+  }
 
 
 }

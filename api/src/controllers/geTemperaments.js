@@ -15,17 +15,59 @@ async function geTemperaments(req,res){
     try{
 
         if(locales.length!==0)
-            res.status(200).json(locales);
+          return  res.status(200).json(locales);
 
        if(responseApi)
         {
             let arrTemperaments =[];
 
-            responseApi.map((t)=> arrTemperaments.push({name: t.name}));
-            //saco los elementos null que retorna la peticion
-             arrTemperaments = arrTemperaments.filter((t)=> t!=null);
+            let preFinalArrTemperaments = [];
 
-            let responseJson = await Temperaments.bulkCreate(arrTemperaments);
+            let finalArr = [];
+
+            let finalObjectArr = [];
+
+            responseApi.map((t)=>
+            { 
+            arrTemperaments.push({temp: t.temperament})
+
+            });
+            //saco los elementos null que retorna la peticion
+             arrTemperaments = arrTemperaments.filter((t)=> t.temp);
+
+
+             arrTemperaments.map((t)=> {
+                let arrString = t.temp.split(" ");
+
+                preFinalArrTemperaments.push(arrString);
+                
+             })
+
+              //convierte el de 2 niveles en un array
+             preFinalArrTemperaments= preFinalArrTemperaments.flat();
+             // saco resultados repetidos
+             preFinalArrTemperaments = [...new Set(preFinalArrTemperaments)];
+
+             preFinalArrTemperaments.map((t)=>
+               {
+                    // le saco la coma a todos los temperamentos
+                   let aux = t.replace(",","");
+
+                    t = aux;
+                    //por ultimo lo pusheo a un nuevo array para que se reflejen los datos
+                    finalArr.push(aux);
+
+                   
+               }
+             )
+                // transformo el array de string en un array de objectos name: temperaments
+               finalArr.map((t)=> {
+
+                    finalObjectArr.push({name:t})
+               })
+              
+            //hago un bulkcreate de la tabla temperaments para inicializar todos los temperamentos.
+            let responseJson = await Temperaments.bulkCreate(finalObjectArr);
 
              res.status(200).json(responseJson);
         }

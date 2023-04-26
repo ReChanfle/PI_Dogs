@@ -7,7 +7,7 @@ const URL = `https://api.thedogapi.com/v1/breeds`;
 
     const responseApi = await fetch(`${URL}`);
 
-    const responseDb = await Temperaments.findAll();
+    //const responseDb = await Temperaments.findAll();
 
     const responseJson = await responseApi.json();
     try{

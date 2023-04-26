@@ -1,12 +1,12 @@
 import { act } from "react-dom/test-utils";
-import { ADD_NICKNAME,GET_DATA, GET_ID } from "./action-types";
+import { ADD_NICKNAME,GET_DATA, GET_ID, GET_TEMPERAMENTS } from "./action-types";
 
 
 const initialState = {
    nickname: '',
    dogs:[],
-   detail:{}
-   
+   detail:{},
+   temperaments: []
   };
 
 
@@ -30,6 +30,11 @@ const reducer = (state = initialState, action) => {
                 return{
                     ...state,
                     detail:action.payload
+                }
+            case GET_TEMPERAMENTS:
+                return{
+                    ...state,
+                    temperaments: action.payload
                 }
 
         }

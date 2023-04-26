@@ -20,7 +20,7 @@ router.post('/dogs/',getDogsByBreed);
 //createDogs
 router.post('/dogs/create',createDogs);
 
-router.get('/', geTemperaments);
+router.get('/temperaments', geTemperaments);
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);

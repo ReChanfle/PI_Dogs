@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Form from './components/Form';
 import Nav from './components/Nav';
 import About from './components/About';
-import Card from './components/Card';
+import CreateDog from './components/CreateDog';
 import Cards from './components/Cards';
 import Detail from './components/Detail';
 import { useDispatch, useSelector } from 'react-redux';
@@ -71,6 +71,7 @@ function App() {
              <Route path="/about" element={<About />}/>
              <Route path="/home" element={ <Cards  dogs={dogs} onClose={onClose}/>}/>
              <Route path="/dogs/:id" element={ <Detail />}/>
+             <Route path="/createdogs/" element={ <CreateDog />}/>
       </Routes>
     </div>
   );

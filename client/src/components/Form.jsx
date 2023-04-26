@@ -65,7 +65,7 @@ export default function Form({login})
 
         return(
             <div className="divForm">
-                <form className="Form" onSubmit={handleSubmit} >
+                <form className="form" onSubmit={handleSubmit} >
                 <img src='https://i.postimg.cc/6QcSpb0d/login-img.png' style={styleLogo} alt="..."/>
                         <h1 className="title">Nickname:</h1>
                     <div className="input-container ic1">

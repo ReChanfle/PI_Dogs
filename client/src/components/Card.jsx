@@ -25,7 +25,7 @@ export default function Card({d}){
                 </div>
             <div className="button-wrapper"> 
                     <Link to={`/dogs/${d.id}`}>
-                      <button class="btn outline">Details</button>
+                      <button className="btn outline">Details</button>
                     </Link>
                 
             </div>

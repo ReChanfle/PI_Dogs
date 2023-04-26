@@ -1,11 +1,12 @@
 const ADD_NICKNAME = 'ADD_NICKNAME';
 const GET_DATA ='GET_DATA';
 const GET_ID = 'GET_ID';
-
+const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS'
 
 
 module.exports = {
     ADD_NICKNAME,
     GET_DATA,
-    GET_ID
+    GET_ID,
+    GET_TEMPERAMENTS
 }

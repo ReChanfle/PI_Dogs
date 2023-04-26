@@ -76,7 +76,7 @@ function Nav({onSearch,logOut}) {
    
     <Link   to="/home">Home</Link>
 
-    <Link to="/favorites">Favs</Link>
+    <Link to="/createdogs">New Dog</Link>
 
     <Link to="/About">About</Link>
    
