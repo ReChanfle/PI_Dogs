@@ -13,9 +13,10 @@ export default function validate(data)
                 heightMax: false,
                 weightMin: false,
                 weightMax: false,
-            }
-
-           // console.log(data.life_spanMin);
+                temperaments: false,
+                allOk: false
+        }
+         
           
         if(regexNickname.test(data.name) && data.name.length<40 && data.name.length>0)  
         obj.name = true;
@@ -47,6 +48,21 @@ export default function validate(data)
         obj.weightMax = true;
                         else
                         obj.weightMax = false;
+
+                       
+        if(data.temperaments.length<=6 && data.temperaments.length>0)
+        {  
+               obj.temperaments=true;
+        }
+           else 
+               obj.temperaments=false
+          
+                
+
+        if(obj.name && obj.heightMax && obj.heightMin && obj.life_spanMax && obj.life_spanMin && obj.temperaments && obj.weightMax && obj.weightMin)
+        obj.allOk = true;
+        
+      
 
         return obj;
 

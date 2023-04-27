@@ -1,4 +1,4 @@
-import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS } from "./action-types";
+import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS,POST_DOGS } from "./action-types";
 
 
 //rehacer con el back 
@@ -66,5 +66,13 @@ export const getDogsById=(id)=>{
 export const add_nickname=(nick)=>{
 
     return{type:ADD_NICKNAME,payload:nick}
+
+}
+
+export const post_dogs=(data)=>{
+
+     
+    return{type:POST_DOGS,payload: data}
+
 
 }

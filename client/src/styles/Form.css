@@ -11,7 +11,7 @@
   box-sizing: border-box;
   height: 500px;
   padding: 20px;
-  margin-top: 10rem;
+  margin-top: 5rem;
   width: 320px;
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);

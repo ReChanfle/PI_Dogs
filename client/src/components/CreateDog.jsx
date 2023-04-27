@@ -2,10 +2,7 @@ import '../styles/CreateDog.css';
 import { useState,useEffect } from "react";
 import validate from '../validateNewDog';
 import { useDispatch,useSelector } from 'react-redux';
-import { get_temperament } from '../redux/actions';
-
-
-
+import { get_temperament,post_dogs } from '../redux/actions';
 
 
 export default function CreateDog()
@@ -21,13 +18,18 @@ export default function CreateDog()
 
     const temperaments = useSelector((state)=> state.temperaments);
 
-    const [searchInput, setSearchInput] = useState("");
+    const postData = useSelector((state)=> state.estadoPostDog);
+
+    const [idTemps, setIdTemps] = useState([]);
+
+    const [arrTemps,setTemps] = useState([]);
 
     const [data, setData] = useState({
         name: "",
         life_spanMin: 0,
         life_spanMax: 0,
-        temperaments: 0,
+        temperaments: [],
+        idTemps: [],
         heightMin: 0,
         heightMax: 0,
         weightMin: 0,
@@ -38,9 +40,8 @@ export default function CreateDog()
         width: '160px',
         heigth: '160px'
       }
-      
-      
 
+     
     function handleChange(event)
     {
         setData({
@@ -52,18 +53,56 @@ export default function CreateDog()
     function handleSearch(event)
     {
         event.preventDefault();
-        setSearchInput(event.target.value);
+        //setSearchInput(event.target.value);
+        setIdTemps([]);
 
-       
+        setTemps([]);
+    
+        setData({
+        ...data,
+        temperaments: arrTemps
+    })
 
-        
     }
+  
+    function handleSelect(event)
+    {
+        if(arrTemps.length<6)
+        {
+            let arr = event.target.value.split(",");
 
+            arrTemps.push(arr[0]);
+            
+            idTemps.push(arr[1]);
+
+            
+            
+        }
+      
+        setData({
+            ...data,
+            temperaments: arrTemps,
+            idTemps: idTemps
+        })
+
+      
+       
+    }
+    function handleSubmit(event)
+    {
+
+        event.preventDefault();
+
+        dispatch(post_dogs(data));
+
+        console.log("envio a reducer",postData);
+
+    }
 
 
         return(
             <div className="divForm">
-                 <form className="Form">
+                 <form className="Form" onSubmit={handleSubmit}>
                 <img src='https://i.postimg.cc/6QcSpb0d/login-img.png'  style={styleLogo} alt="..."/>
                         <p className="title">Create Dog:</p>
 
@@ -113,10 +152,19 @@ export default function CreateDog()
 
                         <h1 className="subtitle">temperament:</h1>
                     <div className="input-container ic1">
-                        <input className="input" placeholder="" name="temperaments" onChange={handleSearch} value={searchInput} type="search"/>
+                        <input className="input" placeholder="" id="searchTemperaments" name="temperaments" onClick={handleSearch} value={data.temperaments} type="search"/>
+                        {validate(data).temperaments ? <p>Limite de temperamentos</p>: <p>puedes agregar mas</p>}
                         </div>
-
-                        <button type="submit" className="submit">Enter App</button>
+                        <select className="" onChange={handleSelect}>
+                            <option disabled selected>Temperaments</option>
+                            {temperaments.map(d => (                    
+                                <option value={[d.name,d.id]} key={d.id} className="">{d.name}</option> //key de elementos de temperamentos, eliminar el repetido reserved
+                            ))}
+                        </select>
+                            {
+                                validate(data).allOk ?  <button type="submit" className="submit" >Enter App</button> : null
+                            }
+                     
                    
                 </form>
                 
