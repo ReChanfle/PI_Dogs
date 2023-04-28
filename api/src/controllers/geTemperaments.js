@@ -57,7 +57,7 @@ async function geTemperaments(req,res){
 
               //convierte el de 2 niveles en un array
              preFinalArrTemperaments= preFinalArrTemperaments.flat();
-             // saco resultados repetidos
+           
            
 
              preFinalArrTemperaments.map((t)=>

@@ -1,7 +1,7 @@
 
 
 const URL = `https://api.thedogapi.com/v1/breeds/`;
-
+//detail de perros
 async function getDogById(req,res){
 
     const {idRaza} = req.params;

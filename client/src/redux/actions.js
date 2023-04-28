@@ -77,7 +77,7 @@ export const post_dogs=(data)=>{
   {
     
 
-    const response = await  fetch('http://localhost:3001/dogs/create', {method: 'POST',
+    const response = await  fetch('http://localhost:3001/createdogs', {method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -86,7 +86,7 @@ export const post_dogs=(data)=>{
     });
      
       const responsJson = await response.json();
-
+    
 
       try{
        
@@ -101,9 +101,9 @@ export const post_dogs=(data)=>{
 
 }
 
-export const resetCreateDog=()=>{
+export const resetCreateDog=(data)=>{
 
 
-      return{type: RESET_MESSAGE}
+      return{type: RESET_MESSAGE,payload:data}
 
 }

@@ -7,7 +7,10 @@ const initialState = {
    dogs:[],
    detail:{},
    temperaments: [],
-   estadoPostDog: '',
+   estadoPostDog: {
+    message: '',
+    status: false
+   },
   };
 
 
@@ -38,7 +41,6 @@ const reducer = (state = initialState, action) => {
                     temperaments: action.payload
                 }
             case POST_DOGS:
-              
                 return{
                     ...state,
                     estadoPostDog: action.payload
@@ -46,7 +48,7 @@ const reducer = (state = initialState, action) => {
             case RESET_MESSAGE:
                 return{
                     ...state,
-                    estadoPostDog: ''
+                    estadoPostDog: action.payload
                 }
 
         }

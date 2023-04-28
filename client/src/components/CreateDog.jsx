@@ -12,6 +12,7 @@ export default function CreateDog()
     const dispatch = useDispatch();
     
     useEffect(() => {
+        console.log("asd");
         dispatch(get_temperament());
         }, []);
 
@@ -19,6 +20,8 @@ export default function CreateDog()
 
 
     const temperaments = useSelector((state)=> state.temperaments);
+
+    
 
     const postData = useSelector((state)=> state.estadoPostDog);
 
@@ -41,7 +44,7 @@ export default function CreateDog()
 
       useEffect(() => {
        
-      chota()
+      CleanForm();
          },[postData.message]);
     
     const styleLogo = {
@@ -93,6 +96,8 @@ export default function CreateDog()
         }
   
     }
+
+   
     function chota()
     {
        
@@ -111,7 +116,7 @@ export default function CreateDog()
               setTemps([]);
               setIdTemps([]);
     
-              dispatch(resetCreateDog());
+            
     
             
     
@@ -127,6 +132,16 @@ export default function CreateDog()
 
    
     }
+
+    function CleanForm()
+    { 
+        if(postData.message=="Perro creado")   chota()
+          
+        setTimeout(() => {
+            dispatch(resetCreateDog({}));
+          }, 3000);
+    }
+    
 
 
         return(
@@ -200,7 +215,7 @@ export default function CreateDog()
                             },
                             <div>
                                 {
-                                   <p>{postData.message}</p> 
+                                    postData.status ? <p>{postData.message}</p> : <p>{postData.message}</p>
                                 }
                             </div>
                            

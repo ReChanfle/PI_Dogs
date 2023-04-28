@@ -7,7 +7,6 @@ async function createDogs(req,res){
     const {name,life_spanMin,life_spanMax,heightMax,heightMin,weightMax,weightMin,temperaments,img_url} = req.body;
 
     //proximo paso chequear que el nombre del perro no existe en la dt
-    // arreglar bug de temperaments duplicados
     const checkIfexist = await Dogs.findOne({where: {name: name}});
 
 
@@ -30,17 +29,15 @@ async function createDogs(req,res){
 
            await newDog.addTemperaments(temps);
 
-           res.status(200).json({message: "Perro Creado"});
+           res.status(200).json({message: "Perro creado",status: true});
     }
     else
-    res.status(200).json({message: "El perro ya existe"});
+    res.status(200).json({message: "Perro existente",status: true});
   
    
-
-
     }
     catch(err){
-        res.status(400).json({error: err.message})
+        res.status(400).json({message: err.message,status: false})
     }
        
 
