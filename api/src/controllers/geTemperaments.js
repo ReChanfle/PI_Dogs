@@ -15,10 +15,20 @@ async function geTemperaments(req,res){
     try{
 
         if(locales.length!==0)
-          return  res.status(200).json(locales);
+        {
+            //elimino posibles duplicados
+            const noDuplicatesLocals = [...new Map(locales.map(v => [v.name, v])).values()];
+
+            return  res.status(200).json(noDuplicatesLocals);
+
+
+        }
+          
 
        if(responseApi)
         {
+            let cleanFinalArr = [];
+
             let arrTemperaments =[];
 
             let preFinalArrTemperaments = [];
@@ -36,6 +46,8 @@ async function geTemperaments(req,res){
              arrTemperaments = arrTemperaments.filter((t)=> t.temp);
 
 
+
+
              arrTemperaments.map((t)=> {
                 let arrString = t.temp.split(" ");
 
@@ -46,7 +58,7 @@ async function geTemperaments(req,res){
               //convierte el de 2 niveles en un array
              preFinalArrTemperaments= preFinalArrTemperaments.flat();
              // saco resultados repetidos
-             preFinalArrTemperaments = [...new Set(preFinalArrTemperaments)];
+           
 
              preFinalArrTemperaments.map((t)=>
                {
@@ -65,9 +77,11 @@ async function geTemperaments(req,res){
 
                     finalObjectArr.push({name:t})
                })
+                //elimino posibles duplicados
+                const noDuplicatesApi = [...new Map(finalObjectArr.map(v => [v.name, v])).values()];
               
             //hago un bulkcreate de la tabla temperaments para inicializar todos los temperamentos.
-            let responseJson = await Temperaments.bulkCreate(finalObjectArr);
+            let responseJson = await Temperaments.bulkCreate(noDuplicatesApi);
 
              res.status(200).json(responseJson);
         }
@@ -77,9 +91,6 @@ async function geTemperaments(req,res){
     {
         res.status(500).end(error.message);
     }
-
-
-  
 
 
 }

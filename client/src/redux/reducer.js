@@ -1,5 +1,5 @@
 
-import { ADD_NICKNAME,GET_DATA, GET_ID, GET_TEMPERAMENTS, POST_DOGS } from "./action-types";
+import { ADD_NICKNAME,GET_DATA, GET_ID, GET_TEMPERAMENTS, POST_DOGS, RESET_MESSAGE } from "./action-types";
 
 
 const initialState = {
@@ -7,7 +7,7 @@ const initialState = {
    dogs:[],
    detail:{},
    temperaments: [],
-   estadoPostDog: [],
+   estadoPostDog: '',
   };
 
 
@@ -38,16 +38,22 @@ const reducer = (state = initialState, action) => {
                     temperaments: action.payload
                 }
             case POST_DOGS:
-                let test =[];
-                console.log(action.payload);
-                test.push(action.payload);
+              
                 return{
                     ...state,
-                    estadoPostDog: test
+                    estadoPostDog: action.payload
+                }
+            case RESET_MESSAGE:
+                return{
+                    ...state,
+                    estadoPostDog: ''
                 }
 
         }
     
   }
+
+
+
 
   export default reducer;

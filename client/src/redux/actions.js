@@ -1,4 +1,4 @@
-import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS,POST_DOGS } from "./action-types";
+import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS,POST_DOGS,RESET_MESSAGE } from "./action-types";
 
 
 //rehacer con el back 
@@ -71,8 +71,39 @@ export const add_nickname=(nick)=>{
 
 export const post_dogs=(data)=>{
 
-     
-    return{type:POST_DOGS,payload: data}
+       
 
+  return async function (dispatch)
+  {
+    
+
+    const response = await  fetch('http://localhost:3001/dogs/create', {method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+     
+      const responsJson = await response.json();
+
+
+      try{
+       
+        dispatch({type:POST_DOGS,payload:responsJson});
+      }
+      catch(err)
+      {
+        console.log(err.message);
+      }
+    }
+
+
+}
+
+export const resetCreateDog=()=>{
+
+
+      return{type: RESET_MESSAGE}
 
 }

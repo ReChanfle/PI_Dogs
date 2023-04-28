@@ -13,7 +13,7 @@ export default function validate(data)
                 heightMax: false,
                 weightMin: false,
                 weightMax: false,
-                temperaments: false,
+                temperaments: 0,
                 allOk: false
         }
          
@@ -50,20 +50,15 @@ export default function validate(data)
                         obj.weightMax = false;
 
                        
-        if(data.temperaments.length<=6 && data.temperaments.length>0)
-        {  
-               obj.temperaments=true;
-        }
-           else 
-               obj.temperaments=false
+        obj.temperaments = data.temperaments.length;
           
                 
 
         if(obj.name && obj.heightMax && obj.heightMin && obj.life_spanMax && obj.life_spanMin && obj.temperaments && obj.weightMax && obj.weightMin)
         obj.allOk = true;
         
-      
-
+        
+        
         return obj;
 
         

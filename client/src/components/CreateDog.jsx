@@ -2,7 +2,8 @@ import '../styles/CreateDog.css';
 import { useState,useEffect } from "react";
 import validate from '../validateNewDog';
 import { useDispatch,useSelector } from 'react-redux';
-import { get_temperament,post_dogs } from '../redux/actions';
+import { get_temperament,post_dogs,resetCreateDog } from '../redux/actions';
+
 
 
 export default function CreateDog()
@@ -10,10 +11,11 @@ export default function CreateDog()
    
     const dispatch = useDispatch();
     
-
     useEffect(() => {
         dispatch(get_temperament());
         }, []);
+
+   
 
 
     const temperaments = useSelector((state)=> state.temperaments);
@@ -29,12 +31,18 @@ export default function CreateDog()
         life_spanMin: 0,
         life_spanMax: 0,
         temperaments: [],
-        idTemps: [],
+        IDs: [],
         heightMin: 0,
         heightMax: 0,
         weightMin: 0,
         weightMax: 0,
+        img_url: ''
       });
+
+      useEffect(() => {
+       
+      chota()
+         },[postData.message]);
     
     const styleLogo = {
         width: '160px',
@@ -52,51 +60,72 @@ export default function CreateDog()
 
     function handleSearch(event)
     {
-        event.preventDefault();
-        //setSearchInput(event.target.value);
-        setIdTemps([]);
-
-        setTemps([]);
-    
-        setData({
+         //cuando el usuario clikea sobre el elemento se vacian los estados de temperamentos 
+     setTemps([]);
+     setIdTemps([]);
+     setData({
         ...data,
-        temperaments: arrTemps
-    })
-
+        temperaments: [],
+        IDs: []
+     })
     }
   
     function handleSelect(event)
     {
-        if(arrTemps.length<6)
-        {
-            let arr = event.target.value.split(",");
 
-            arrTemps.push(arr[0]);
-            
-            idTemps.push(arr[1]);
+        if(data.temperaments.length<=5){
+            let dataFromSelect = event.target.value.split(",");
+        
+            arrTemps.push(dataFromSelect[0]);
+    
+            idTemps.push(dataFromSelect[1]);
 
-            
-            
+            //elimino duplicados de ids y temps
+            let auxTemps =  [...new Set(arrTemps)];
+            let auxIds = [...new Set(idTemps)];
+           
+
+            setData({
+                ...data,
+                temperaments: arrTemps,
+                IDs: idTemps,
+            })
         }
-      
-        setData({
-            ...data,
-            temperaments: arrTemps,
-            idTemps: idTemps
-        })
-
-      
-       
+  
     }
+    function chota()
+    {
+       
+            setData({
+                name: "",
+                life_spanMin: 0,
+                life_spanMax: 0,
+                temperaments: [],
+                IDs: [],
+                heightMin: 0,
+                heightMax: 0,
+                weightMin: 0,
+                weightMax: 0,
+                img_url: ''
+              })
+              setTemps([]);
+              setIdTemps([]);
+    
+              dispatch(resetCreateDog());
+    
+            
+    
+        
+    }
+   
     function handleSubmit(event)
     {
-
+    
         event.preventDefault();
 
         dispatch(post_dogs(data));
 
-        console.log("envio a reducer",postData);
-
+   
     }
 
 
@@ -148,22 +177,33 @@ export default function CreateDog()
                         {validate(data).life_spanMax ? <p>bien</p>: <p>mal</p>}
                         </div>
 
+                        <h1 className="subtitle">img-url:</h1>
+                    <div className="input-container ic1">
+                        <input className="input" placeholder="" name="img_url" onChange={handleChange} value={data.img_url} />
+                       
+                        </div>
                      
 
                         <h1 className="subtitle">temperament:</h1>
                     <div className="input-container ic1">
-                        <input className="input" placeholder="" id="searchTemperaments" name="temperaments" onClick={handleSearch} value={data.temperaments} type="search"/>
-                        {validate(data).temperaments ? <p>Limite de temperamentos</p>: <p>puedes agregar mas</p>}
+                        <input className="input" readOnly  name="temperaments" onClick={handleSearch} value={data.temperaments} />
+                        {validate(data).temperaments===6 ? <p>Limite de temperamentos</p> : <p>puedes agregar mas</p>}
                         </div>
                         <select className="" onChange={handleSelect}>
-                            <option disabled selected>Temperaments</option>
+                            <option disabled readOnly>Temperaments</option>
                             {temperaments.map(d => (                    
                                 <option value={[d.name,d.id]} key={d.id} className="">{d.name}</option> //key de elementos de temperamentos, eliminar el repetido reserved
                             ))}
                         </select>
                             {
                                 validate(data).allOk ?  <button type="submit" className="submit" >Enter App</button> : null
-                            }
+                            },
+                            <div>
+                                {
+                                   <p>{postData.message}</p> 
+                                }
+                            </div>
+                           
                      
                    
                 </form>

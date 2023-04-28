@@ -3,12 +3,13 @@ const GET_DATA ='GET_DATA';
 const GET_ID = 'GET_ID';
 const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS';
 const POST_DOGS = 'POST_DOGS';
-
+const RESET_MESSAGE ='RESET_MESSAGE';
 
 module.exports = {
     ADD_NICKNAME,
     GET_DATA,
     GET_ID,
     GET_TEMPERAMENTS,
-    POST_DOGS
+    POST_DOGS,
+    RESET_MESSAGE
 }
