@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import SearchBar from './SearchBar.jsx';
 import '../styles/Nav.css';
 
 function Nav({onSearch,logOut}) {
@@ -81,7 +82,7 @@ function Nav({onSearch,logOut}) {
     <Link to="/About">About</Link>
    
     
-
+    <SearchBar onSearch={onSearch} />
     
 
     <a onClick={handleSubmit}>{user}</a>

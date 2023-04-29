@@ -24,6 +24,7 @@ function App() {
   },[])
 
   const [access, setAccess] = useState(false);
+  const [localDogs,setLocalDogs] = useState([{}]);
 
   const user = useSelector((state)=>
     state.nickname
@@ -33,7 +34,14 @@ function App() {
     state.dogs
   )
 
+  useEffect(()=>{
+   
+    setLocalDogs(dogs);
+  },[])
+
   
+
+  console.log(dogs);
 
 
   const navigate = useNavigate();
@@ -57,19 +65,20 @@ function App() {
   {
      setAccess(access);
   }
-   
-  function onClose()
+  function onSearch(dogs)
   {
-
+      //setLocalDogs(dogs);
   }
+   
+  
   
   return (
     <div className="App">
-          {access ? <Nav  logOut={logOut} /> : null }
+          {access ? <Nav  logOut={logOut}  onSearch={onSearch}/> : null }
       <Routes>
              <Route path="/" element={<Form login={login}  />}/>
              <Route path="/about" element={<About />}/>
-             <Route path="/home" element={ <Cards  dogs={dogs} onClose={onClose}/>}/>
+             <Route path="/home" element={ <Cards  dogs={localDogs} />}/>
              <Route path="/dogs/:id" element={ <Detail />}/>
              <Route path="/createdogs/" element={ <CreateDog />}/>
       </Routes>

@@ -1,5 +1,5 @@
 
-import { ADD_NICKNAME,GET_DATA, GET_ID, GET_TEMPERAMENTS, POST_DOGS, RESET_MESSAGE } from "./action-types";
+import { ADD_NICKNAME,GET_DATA, GET_ID, GET_TEMPERAMENTS, POST_DOGS, RESET_MESSAGE,SEARCH_DOG } from "./action-types";
 
 
 const initialState = {
@@ -11,6 +11,7 @@ const initialState = {
     message: '',
     status: false
    },
+   search_results:[]
   };
 
 
@@ -49,6 +50,11 @@ const reducer = (state = initialState, action) => {
                 return{
                     ...state,
                     estadoPostDog: action.payload
+                }
+            case SEARCH_DOG:
+                return{
+                    ...state,
+                    search_results: action.payload
                 }
 
         }

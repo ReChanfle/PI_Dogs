@@ -1,4 +1,4 @@
-import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS,POST_DOGS,RESET_MESSAGE } from "./action-types";
+import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS,POST_DOGS,RESET_MESSAGE, SEARCH_DOG } from "./action-types";
 
 
 //rehacer con el back 
@@ -105,5 +105,28 @@ export const resetCreateDog=(data)=>{
 
 
       return{type: RESET_MESSAGE,payload:data}
+
+}
+
+export const searchDogs=(name)=>{
+ 
+  return async function (dispatch)
+  {
+    const response = await fetch(`http://localhost:3001/search/?name=${name}`);
+    
+    const responsJson = await response.json();
+
+    try{
+     
+      dispatch({type: SEARCH_DOG,payload:responsJson});
+    }
+    catch(err)
+    {
+      console.log(err.message);
+    }
+  }
+
+
+
 
 }

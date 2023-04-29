@@ -19,9 +19,9 @@ async function createDogs(req,res){
     {
         const newDog = await Dogs.create({
             name: name,
-            life_span: `${life_spanMin}-${life_spanMax}  years`,
-           height: `${heightMin}-${heightMax}`, 
-            weight: `${weightMin}-${weightMax}`,
+            life_span: `${life_spanMin} - ${life_spanMax} years`,
+           height: `${heightMin} - ${heightMax}`, 
+            weight: `${weightMin} - ${weightMax}`,
             img: img_url,
            }) 
 
