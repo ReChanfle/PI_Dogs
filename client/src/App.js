@@ -9,8 +9,9 @@ import About from './components/About';
 import CreateDog from './components/CreateDog';
 import Cards from './components/Cards';
 import Detail from './components/Detail';
+import Filter from './components/Filter';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDogs } from './redux/actions';
+import { getDogs,get_temperament } from './redux/actions';
 
 
 function App() {
@@ -20,29 +21,17 @@ function App() {
   useEffect(()=>{
     document.title = 'PI-Dogs';
       dispatch(getDogs());
+      
 
   },[])
 
   const [access, setAccess] = useState(false);
-  const [localDogs,setLocalDogs] = useState([{}]);
 
-  const user = useSelector((state)=>
-    state.nickname
-  ) 
+  const [search_or_all,setSearch] = useState(false);
+ 
+  const dogs = useSelector((state)=> state.dogs);
 
-  const dogs = useSelector((state)=>
-    state.dogs
-  )
-
-  useEffect(()=>{
-   
-    setLocalDogs(dogs);
-  },[])
-
-  
-
-  console.log(dogs);
-
+  const searchDogs = useSelector((state)=> state.search_results);
 
   const navigate = useNavigate();
 
@@ -65,20 +54,28 @@ function App() {
   {
      setAccess(access);
   }
-  function onSearch(dogs)
+  function onSearch(show)
   {
-      //setLocalDogs(dogs);
+      setSearch(show);
+
   }
-   
+  function deleteSearch(not_show)
+  {
+    setSearch(not_show);
+
+  }
   
+   
+ 
   
   return (
     <div className="App">
-          {access ? <Nav  logOut={logOut}  onSearch={onSearch}/> : null }
+          {access ? <Nav  logOut={logOut}  onSearch={onSearch} deleteSearch={deleteSearch} /> : null }
+        
       <Routes>
              <Route path="/" element={<Form login={login}  />}/>
              <Route path="/about" element={<About />}/>
-             <Route path="/home" element={ <Cards  dogs={localDogs} />}/>
+             <Route path="/home" element={ <><Filter filter={search_or_all}/><Cards  showDogs={search_or_all ? searchDogs : dogs}  /></>}/>
              <Route path="/dogs/:id" element={ <Detail />}/>
              <Route path="/createdogs/" element={ <CreateDog />}/>
       </Routes>

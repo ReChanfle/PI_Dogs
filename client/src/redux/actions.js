@@ -1,4 +1,4 @@
-import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS,POST_DOGS,RESET_MESSAGE, SEARCH_DOG } from "./action-types";
+import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS,POST_DOGS,RESET_MESSAGE, SEARCH_DOG,FILTER_AZ,FILTER_WEIGHT,FILTER_TEMP,FILTER_API } from "./action-types";
 
 
 //rehacer con el back 
@@ -110,6 +110,7 @@ export const resetCreateDog=(data)=>{
 
 export const searchDogs=(name)=>{
  
+ 
   return async function (dispatch)
   {
     const response = await fetch(`http://localhost:3001/search/?name=${name}`);
@@ -130,3 +131,35 @@ export const searchDogs=(name)=>{
 
 
 }
+
+export const filterAZ=(data)=>{
+
+  
+
+  return{type: FILTER_AZ,payload:data}
+
+}
+
+
+
+export const filterWeight=(data)=>{
+
+  return{type: FILTER_WEIGHT,payload:data}
+  
+}
+export const filterAPI=(data)=>{
+
+  
+
+  return{type: FILTER_API,payload:data}
+  
+}
+export const filterTemp=(data)=>{
+
+
+
+  return{type: FILTER_TEMP,payload:data}
+  
+}
+
+

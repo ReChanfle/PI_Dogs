@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import SearchBar from './SearchBar.jsx';
 import '../styles/Nav.css';
 
-function Nav({onSearch,logOut}) {
+function Nav({onSearch,logOut,deleteSearch}) {
 
     
         const user = useSelector((state)=> state.nickname);
@@ -21,6 +21,13 @@ function Nav({onSearch,logOut}) {
           } else {
             x.className = "topnav";
           }
+        }
+
+        function handleDelete(event)
+        {
+
+            deleteSearch(false);
+
         }
 
        
@@ -83,6 +90,7 @@ function Nav({onSearch,logOut}) {
    
     
     <SearchBar onSearch={onSearch} />
+    <a onClick={handleDelete}>DELETE SEARCH</a>
     
 
     <a onClick={handleSubmit}>{user}</a>
@@ -91,6 +99,7 @@ function Nav({onSearch,logOut}) {
     <i className="fa fa-bars"></i>
     </a>
   </div>
+  
   
 
    );

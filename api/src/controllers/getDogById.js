@@ -9,7 +9,7 @@ async function getDogById(req,res){
     const responseApi = await fetch(`${URL}+${idRaza}`);
 
     const responseJson = await responseApi.json();
-    try{
+    try{ 
         
 
        if(responseJson)

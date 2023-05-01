@@ -20,8 +20,8 @@ export default function Card({d}){
               <img src={d.img} style={styleImg} alt='img_profile' /> 
                </div>
                 <h1>{d.name}</h1>
-                  <p>{d.temperament}</p>
-                  <p>{d.weight}</p>
+                  <p>Temperaments: {d.temperament}</p>
+                  <p>Weight: {d.weight}</p>
                 </div>
             <div className="button-wrapper"> 
                     <Link to={`/dogs/${d.id}`}>

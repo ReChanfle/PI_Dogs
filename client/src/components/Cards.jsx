@@ -1,13 +1,13 @@
 import Card from "./Card";
 import '../styles/Cards.css';
 
-export default function Cards({dogs}){
+export default function Cards({showDogs}){
     
-       
+       console.log(showDogs)
 
     return(
         <div className="cards">
-            { dogs && dogs.map((d)=> {return <Card  key={d.id} d={d}/>})}
+            { showDogs && showDogs.map((d)=> {return <Card  key={d.id} d={d}/>})}
         
         </div>
     )

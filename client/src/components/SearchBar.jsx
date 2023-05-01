@@ -10,7 +10,7 @@ export default function SearchBar({onSearch}) {
 
    const [name, setName] = useState("");
 
-   console.log(results);
+  
 
   function handleChange(event) {
    console.log("input value ", event.target.value);
@@ -19,9 +19,13 @@ export default function SearchBar({onSearch}) {
   function handleKeyDown(event)
   {
     if (event.key === 'Enter') {
-       
+       if(event.target.value)
+       {
         dispatch(searchDogs(event.target.value));
 
+        onSearch(true);
+       
+       }
        
   }
 }
