@@ -1,2 +1,2 @@
 # PI_Dogs
-Personal proyect Henry Academie
+Personal proyect Henry Academy
