@@ -1,4 +1,4 @@
-import '../styles/Cards.css';
+import '../styles/Filter.css';
 import { useDispatch,useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { get_temperament,filterAPI,filterAZ,filterTemp,filterWeight } from '../redux/actions';
@@ -49,7 +49,7 @@ export default function Filter(search_or_all){
      },[])
 
         return(
-            <div class="container" >
+            <div class="containerFilter" >
             <div class="custom-select">
             <select   onChange={handleAz} >
                  <option  value="A">A-Z</option>

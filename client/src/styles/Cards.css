@@ -1,9 +1,10 @@
 @media screen and (min-width: 40em) {
     .cards {
-      
+       
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        align-items: center;
+        justify-content: center;
     }
 }
 

@@ -1,10 +1,12 @@
 
-import { ADD_NICKNAME,FILTER_AZ,GET_DATA, GET_ID, GET_TEMPERAMENTS, POST_DOGS, RESET_MESSAGE,SEARCH_DOG,FILTER_WEIGHT,FILTER_API } from "./action-types";
+import { ADD_NICKNAME,FILTER_AZ,GET_DATA, GET_ID, GET_TEMPERAMENTS, POST_DOGS, RESET_MESSAGE,SEARCH_DOG,FILTER_WEIGHT,FILTER_API,CHANGE_PAGE, CHANGE_PAGE_SEARCH } from "./action-types";
 
 
 
 const initialState = {
    nickname: '',
+   pagination: 1,
+   paginationSearch: 1,
    dogs:[],
    originalDog: [],
    detail:{},
@@ -61,13 +63,96 @@ const reducer = (state = initialState, action) => {
                     search_results: action.payload,
                     originalSearch : [...action.payload]
                 }
+            case CHANGE_PAGE_SEARCH:
+                   
+                        if(action.payload.data>0)
+                        state.paginationSearch = action.payload.data
+                        else
+                        state.paginationSearch = 1
+
+               
+                        if(state.originalSearch.length>=10)
+                        {
+                            let limit = Math.floor(state.originalSearch.length/10);
+                            if(state.paginationSearch>state.originalSearch.length/10)
+                             state.paginationSearch = limit;
+     
+                             let start = (state.paginationSearch-1)*10;
+                             let end = state.paginationSearch*10;
+                             if(end>=state.originalSearch.length-1)
+                             {
+                                 end = state.originalSearch.length-1;
+                                 start = state.originalSearch.length-10;
+                                
+                             }
+                             let test = state.originalSearch.slice(start,end);
+                             return{
+                                ...state,
+                                search_results: [...test]
+                            }
+                        }
+                      
+                        return{
+                            ...state,
+                            paginationSearch: 1
+                        } 
+                case CHANGE_PAGE:
+                        if(action.payload.data>0)
+                        state.pagination = action.payload.data
+                        else
+                        state.pagination = 1
+
+                        let start = (state.pagination-1)*10;
+                        let end = state.pagination*10;
+                        if(end>=state.originalDog.length-1)
+                        {
+                            end = state.originalDog.length-1;
+                            start = state.originalDog.length-10;
+                           
+                        }
+                            
+                        let test = state.originalDog.slice(start,end);
+
+                        let limit = Math.floor(state.originalDog.length/10);
+                        if(state.pagination>state.originalDog.length/10)
+                         state.pagination = limit;
+                        
+                        return{
+                            ...state,
+                            dogs: [...test]
+                        }
             case FILTER_AZ:
                 if(action.payload.filter)
                 {
                     let filtered = [];
-                    if(action.payload.data==="A") filtered= state.search_results.reverse();
-                        else
-                            filtered= state.search_results.reverse();
+                            if(action.payload.data==="A")
+                            {
+                                filtered =  state.search_results.sort(function (a, b) {
+                                    if (a.name > b.name) {
+                                      return 1;
+                                    }
+                                    if (a.name < b.name) {
+                                      return -1;
+                                    }
+                                  
+                                    return 0;
+                                  });
+                            }
+                            else
+                            { 
+                                filtered =  state.search_results.sort(function (a, b) {
+                                if (a.name < b.name) {
+                                  return 1;
+                                }
+                                if (a.name > b.name) {
+                                  return -1;
+                                }
+                              
+                                return 0;
+                              });
+
+                            }
+                           
                           
                     return{
                         ...state,
@@ -77,9 +162,33 @@ const reducer = (state = initialState, action) => {
                 else
                 {
                     let filtered = [];
-                    if(action.payload.data==="Z") filtered= state.dogs.reverse();
-                        else
-                            filtered= state.dogs.reverse();
+                 
+                            if(action.payload.data==="A")
+                            {
+                                filtered =  state.dogs.sort(function (a, b) {
+                                    if (a.name > b.name) {
+                                      return 1;
+                                    }
+                                    if (a.name < b.name) {
+                                      return -1;
+                                    }
+                              
+                                  });
+                            }
+                            else
+                            { 
+                                filtered =  state.dogs.sort(function (a, b) {
+                                if (a.name < b.name) {
+                                  return 1;
+                                }
+                                if (a.name > b.name) {
+                                  return -1;
+                                }
+                                // a must be equal to b
+                                return 0;
+                              });
+
+                            }
                            // hay que usar spread operator porque sino react no detecta el cambio de valor, ya que la refderencia no es modificada
                     return{
                         ...state,
@@ -172,7 +281,7 @@ const reducer = (state = initialState, action) => {
             case FILTER_API:
                     if(action.payload.filter)
                     {   
-                        console.log(state.originalSearch)
+                       
                         state.search_results = [...state.originalSearch];
 
                         let filtered = [];
@@ -227,6 +336,6 @@ const reducer = (state = initialState, action) => {
   }
 
 
-
+  
 
   export default reducer;

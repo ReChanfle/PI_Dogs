@@ -1,4 +1,4 @@
-import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS,POST_DOGS,RESET_MESSAGE, SEARCH_DOG,FILTER_AZ,FILTER_WEIGHT,FILTER_TEMP,FILTER_API } from "./action-types";
+import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS,POST_DOGS,RESET_MESSAGE, SEARCH_DOG,FILTER_AZ,FILTER_WEIGHT,FILTER_TEMP,FILTER_API,CHANGE_PAGE, CHANGE_PAGE_SEARCH } from "./action-types";
 
 
 //rehacer con el back 
@@ -126,10 +126,6 @@ export const searchDogs=(name)=>{
       console.log(err.message);
     }
   }
-
-
-
-
 }
 
 export const filterAZ=(data)=>{
@@ -157,9 +153,25 @@ export const filterAPI=(data)=>{
 export const filterTemp=(data)=>{
 
 
-
   return{type: FILTER_TEMP,payload:data}
   
 }
+
+
+export const changePage=(data)=> {
+
+  return{type: CHANGE_PAGE,payload:data}
+
+}
+
+export const changePageSearch=(data)=> {
+
+  return{type: CHANGE_PAGE_SEARCH,payload:data}
+
+}
+
+
+
+
 
 
