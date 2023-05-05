@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import '../styles/Nav.css';
 import { useDispatch,useSelector } from 'react-redux';
 import { searchDogs } from '../redux/actions';
+
+
 export default function SearchBar({onSearch}) {
 
    const dispatch = useDispatch();
@@ -19,7 +21,7 @@ export default function SearchBar({onSearch}) {
         dispatch(searchDogs(event.target.value));
 
         onSearch(true);
-       
+    
        }
        
       }

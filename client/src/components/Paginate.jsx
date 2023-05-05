@@ -1,15 +1,23 @@
-import { useSelector,useDispatch } from "react-redux"
+import { useSelector,useDispatch } from "react-redux";
 import { changePage,changePageSearch} from "../redux/actions";
-import { useEffect } from "react";
+import { useEffect,useLayoutEffect } from "react";
 
 export default function Paginate(search_or_all)
 {
 
     const dispatch = useDispatch();
 
-    let paginate = 0;
+    let paginate = 1;
 
-    let paginateSearch = 0;
+    let paginateSearch = 1;
+
+   
+    useEffect(()=>{ 
+       
+        dispatch(changePage({data:paginate}));
+       
+        dispatch(changePageSearch({data:paginateSearch}));
+      },[])
 
     const num = useSelector((state)=> state.pagination);
 
@@ -18,7 +26,9 @@ export default function Paginate(search_or_all)
     paginate = num;
 
     paginateSearch = numSearch;
-   
+
+
+  
    
     function handleClick(event)
     {
@@ -53,10 +63,7 @@ export default function Paginate(search_or_all)
     }
 
 
-    useEffect(()=>{
-        dispatch(changePage({data:paginate}));
-        dispatch(changePageSearch({data:paginateSearch}));
-      },[])
+    
 
     return(
         <div>

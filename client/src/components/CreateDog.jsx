@@ -12,7 +12,7 @@ export default function CreateDog()
     const dispatch = useDispatch();
     
     useEffect(() => {
-        console.log("asd");
+      
         dispatch(get_temperament());
         }, []);
 
@@ -98,7 +98,7 @@ export default function CreateDog()
     }
 
    
-    function chota()
+    function clean()
     {
        
             setData({
@@ -116,11 +116,6 @@ export default function CreateDog()
               setTemps([]);
               setIdTemps([]);
     
-            
-    
-            
-    
-        
     }
    
     function handleSubmit(event)
@@ -135,7 +130,7 @@ export default function CreateDog()
 
     function CleanForm()
     { 
-        if(postData.message=="Perro creado")   chota()
+        if(postData.message=="Perro creado")   clean()
           
         setTimeout(() => {
             dispatch(resetCreateDog({}));
@@ -195,14 +190,14 @@ export default function CreateDog()
                         <h1 className="subtitle">img-url:</h1>
                     <div className="input-container ic1">
                         <input className="input" placeholder="" name="img_url" onChange={handleChange} value={data.img_url} />
-                       
+                        {validate(data).img ? <p>bien</p>: <p>mal</p>}
                         </div>
                      
 
                         <h1 className="subtitle">temperament:</h1>
                     <div className="input-container ic1">
                         <input className="input" readOnly  name="temperaments" onClick={handleSearch} value={data.temperaments} />
-                        {validate(data).temperaments===6 ? <p>Limite de temperamentos</p> : <p>puedes agregar mas</p>}
+                        {validate(data).temperaments===6 ? <p>Limite de temperamentos</p> : validate(data).temperaments===0 ? <p>Debes tener al menos un temperament</p> : <p>Puedes agregar mas</p> }
                         </div>
                         <select className="" onChange={handleSelect}>
                             <option disabled readOnly>Temperaments</option>

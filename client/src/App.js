@@ -77,7 +77,7 @@ function App() {
       <Routes>
              <Route path="/" element={<Form login={login}  />}/>
              <Route path="/about" element={<About />}/>
-             <Route path="/home" element={ <><Filter filter={search_or_all}/><Cards  showDogs={search_or_all ? searchDogs : dogs}  /><Paginate filter={search_or_all}/></>}/>
+             <Route path="/home" element={ <><Filter filter={search_or_all} dogs={search_or_all ? searchDogs : dogs} /><Cards  showDogs={search_or_all ? searchDogs : dogs}  /><Paginate filter={search_or_all}/></>}/>
              <Route path="/dogs/:id" element={ <Detail />}/>
              <Route path="/createdogs/" element={ <CreateDog />}/>
       </Routes>

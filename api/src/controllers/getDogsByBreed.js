@@ -14,7 +14,7 @@ async function getDogsByBreed(req,res){
     {
         try{
 
-            // arra limitado para devolver los primeros 5 resultados de la API
+          
             let responseArrAPI = [];
             let finalArr = [];
             let finalLocals = [];
@@ -24,14 +24,15 @@ async function getDogsByBreed(req,res){
             let responseApi = await fetch(`${URL}${name}`);
             let responseJson = await responseApi.json();
     
-            if(responseJson.length>5)
-                responseArrAPI = responseJson.slice(0,5);
-             else
+            // esto se usaba para cortar los resultados de la busqueda
+           // if(responseJson.length>5)
+             //   responseArrAPI = responseJson.slice(0,5);
+           //  else
                 responseArrAPI = responseJson;
     
                 responseArrAPI.map((d)=>{
     
-                    finalAPI.push({id:d.id, name:d.name,img:`https://cdn2.thedogapi.com/images/${d.reference_image_id}.jpg`,height:d.height.metric,weight: d.weight.metric,life_span:d.life_span,temperaments: d.temperament})
+                    finalAPI.push({id:d.id, name:d.name,img:`https://cdn2.thedogapi.com/images/${d.reference_image_id}.jpg`,height:d.height.metric,weight: d.weight.metric,life_span:d.life_span,temperament: d.temperament})
     
                 })
     
@@ -41,7 +42,7 @@ async function getDogsByBreed(req,res){
             let localDogs = await Dogs.findAll({where:{name:{  [Op.startsWith]: `${name}%`}},include: {
                 model: Temperaments,
                 attributes: ['name']
-              },  limit: 5 });
+              }});
            
            
               localDogs.map((d) => {

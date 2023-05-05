@@ -12,8 +12,9 @@ async function createDogs(req,res){
 
     try{
 
-    
-    let tempArray = Object.values(temperaments);
+   
+    //let tempArray = Object.values(temperaments);
+   
         //checkeo que el perro no exista para crearlo
     if(!checkIfexist)
     {
@@ -25,7 +26,7 @@ async function createDogs(req,res){
             img: img_url,
            }) 
 
-           const temps = await Temperaments.findAll({where: {name: tempArray  } });
+           const temps = await Temperaments.findAll({where: {name: temperaments  } });
 
            await newDog.addTemperaments(temps);
 

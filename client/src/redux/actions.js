@@ -63,6 +63,7 @@ export const getDogsById=(id)=>{
 
 }
 
+
 export const add_nickname=(nick)=>{
 
     return{type:ADD_NICKNAME,payload:nick}

@@ -8,6 +8,7 @@ const createDogs = require('../controllers/createDogs.js');
 const geTemperaments = require('../controllers/geTemperaments.js');
 
 
+
 const router = Router();
 
 
@@ -15,6 +16,7 @@ const router = Router();
 router.get('/dogs',  getDogs);
 
 router.get('/dogs/:idRaza', getDogById);
+
 //Esta ruta debe obtener todas aquellas razas de perros que coinciden con el nombre recibido por query.
 router.get('/search',getDogsByBreed);
 //createDogs

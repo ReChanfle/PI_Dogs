@@ -1,5 +1,5 @@
 
-import { ADD_NICKNAME,FILTER_AZ,GET_DATA, GET_ID, GET_TEMPERAMENTS, POST_DOGS, RESET_MESSAGE,SEARCH_DOG,FILTER_WEIGHT,FILTER_API,CHANGE_PAGE, CHANGE_PAGE_SEARCH } from "./action-types";
+import { ADD_NICKNAME,FILTER_AZ,GET_DATA, GET_ID, GET_TEMPERAMENTS, POST_DOGS, RESET_MESSAGE,SEARCH_DOG,FILTER_WEIGHT,FILTER_API,FILTER_TEMP,CHANGE_PAGE, CHANGE_PAGE_SEARCH } from "./action-types";
 
 
 
@@ -9,14 +9,16 @@ const initialState = {
    paginationSearch: 1,
    dogs:[],
    originalDog: [],
-   detail:{},
+   detail:[],
    temperaments: [],
    estadoPostDog: {
     message: '',
     status: false
    },
    search_results:[],
-   originalSearch: []
+   originalSearch: [],
+   originalTemp: [],
+   filterTemp: []
   };
 
 
@@ -35,7 +37,7 @@ const reducer = (state = initialState, action) => {
                 return{
                     ...state,
                     dogs : action.payload,
-                    originalDog : [...state.dogs]
+                    originalDog : [...action.payload]
                 }
             case GET_ID:
                 return{
@@ -58,44 +60,52 @@ const reducer = (state = initialState, action) => {
                     estadoPostDog: action.payload
                 }
             case SEARCH_DOG:
+
                 return{
                     ...state,
-                    search_results: action.payload,
+                    search_results: action.payload.length>10 ? action.payload.slice(0,10): action.payload,
                     originalSearch : [...action.payload]
                 }
             case CHANGE_PAGE_SEARCH:
-                   
                         if(action.payload.data>0)
                         state.paginationSearch = action.payload.data
                         else
-                        state.paginationSearch = 1
+                        state.paginationSearch = 1;
 
-               
-                        if(state.originalSearch.length>=10)
+                      
+                        //si  los resultados devueltos son mayores a 10 se procede a  dividirlos para mostrarlos
+                        if(state.search_results.length>=10)
                         {
-                            let limit = Math.floor(state.originalSearch.length/10);
-                            if(state.paginationSearch>state.originalSearch.length/10)
-                             state.paginationSearch = limit;
-     
+                           
+                         
+                            let limit = Math.round(state.originalSearch.length/10);
+                           
+                          
                              let start = (state.paginationSearch-1)*10;
                              let end = state.paginationSearch*10;
-                             if(end>=state.originalSearch.length-1)
+                             if(end>state.originalSearch.length)
                              {
-                                 end = state.originalSearch.length-1;
+                                 end = state.originalSearch.length;
                                  start = state.originalSearch.length-10;
                                 
                              }
                              let test = state.originalSearch.slice(start,end);
+                         
+
+                             if(state.paginationSearch>limit)
+                             state.paginationSearch = limit;
                              return{
                                 ...state,
-                                search_results: [...test]
+                                search_results: [...test],
+                                originalTemp: [...test]
                             }
-                        }
-                      
+                        } 
                         return{
                             ...state,
-                            paginationSearch: 1
-                        } 
+                            paginationSearch :1
+                        }
+                      
+                       
                 case CHANGE_PAGE:
                         if(action.payload.data>0)
                         state.pagination = action.payload.data
@@ -104,22 +114,25 @@ const reducer = (state = initialState, action) => {
 
                         let start = (state.pagination-1)*10;
                         let end = state.pagination*10;
-                        if(end>=state.originalDog.length-1)
+                        if(end>state.originalDog.length)
                         {
-                            end = state.originalDog.length-1;
+                            end = state.originalDog.length;
                             start = state.originalDog.length-10;
                            
                         }
                             
                         let test = state.originalDog.slice(start,end);
-
-                        let limit = Math.floor(state.originalDog.length/10);
-                        if(state.pagination>state.originalDog.length/10)
+                        
+                        let limit = Math.round(state.originalDog.length/10);
+                        if(state.pagination>limit)
                          state.pagination = limit;
+
+
                         
                         return{
                             ...state,
-                            dogs: [...test]
+                            dogs: [...test],
+                            originalTemp: [...test]
                         }
             case FILTER_AZ:
                 if(action.payload.filter)
@@ -184,12 +197,12 @@ const reducer = (state = initialState, action) => {
                                 if (a.name > b.name) {
                                   return -1;
                                 }
-                                // a must be equal to b
+                              
                                 return 0;
                               });
 
                             }
-                           // hay que usar spread operator porque sino react no detecta el cambio de valor, ya que la refderencia no es modificada
+                           // hay que usar spread operator porque sino react no detecta el cambio de valor, ya que la referencia no es modificada
                     return{
                         ...state,
                         dogs :  [...filtered]
@@ -211,7 +224,6 @@ const reducer = (state = initialState, action) => {
                               return 1;
                             }
                           
-                            // names must be equal
                             return 0;
                           });
                     }
@@ -227,7 +239,6 @@ const reducer = (state = initialState, action) => {
                               return 1;
                             }
                           
-                            // names must be equal
                             return 0;
                           });
                     }
@@ -282,20 +293,22 @@ const reducer = (state = initialState, action) => {
                     if(action.payload.filter)
                     {   
                        
-                        state.search_results = [...state.originalSearch];
+                        //state.search_results = [...state.originalSearch];
 
                         let filtered = [];
                         if(action.payload.data==="Custom")
-                         filtered = state.search_results.filter((d)=>  {
+                         filtered = state.originalTemp.filter((d)=>  {
                             if(typeof d.id === 'string') 
                                     return d
                          })
-                         state.search_results = [...state.originalSearch];
+                         //state.search_results = [...state.originalSearch];
                          if(action.payload.data==="API")
-                         filtered = state.search_results.filter((d)=>  {
+                         filtered = state.originalTemp.filter((d)=>  {
                             if(typeof d.id === 'number') 
                                 return d
                          } )
+                         if(action.payload.data==="All")
+                         filtered = [...state.originalTemp]
                          return{
                             ...state,
                             search_results: [...filtered]
@@ -304,19 +317,21 @@ const reducer = (state = initialState, action) => {
                     else
                     {
                        
-                      state.dogs = [...state.originalDog];
+                      //state.dogs = [...state.originalDog];
                         let filtered = [];
                         if(action.payload.data==="Custom")
-                         filtered = state.dogs.filter((d)=>  {
+                         filtered = state.originalTemp.filter((d)=>  {
                             if(typeof d.id === 'string') 
                                     return d
                          })
-                         state.dogs = [...state.originalDog];
+                         //state.dogs = [...state.originalDog];
                          if(action.payload.data==="API")
-                         filtered = state.dogs.filter((d)=>  {
+                         filtered = state.originalTemp.filter((d)=>  {
                             if(typeof d.id === 'number') 
                                 return d
                          } )
+                         if(action.payload.data==="All")
+                         filtered = [...state.originalTemp]
                        
                          return{
                             ...state,
@@ -324,6 +339,62 @@ const reducer = (state = initialState, action) => {
                          }
 
                     } 
+                case FILTER_TEMP:
+                    if(action.payload.filter && action.payload.data!=="All")
+                        {
+                          //originalTemp es un array compuesto por los elementos de cada pagina
+                            let filtered = state.originalTemp.filter((d)=>{
+
+                                    let arrTemps = d.temperament.split(", ");
+                                        if(arrTemps.includes(action.payload.data))
+                                           return d;
+
+                            })
+                         
+                            return{
+                                ...state,
+                                search_results:[...filtered]
+                            }
+                        }
+                         if(!action.payload.filter && action.payload.data!=="All")
+                        {
+                           
+                            let filtered = state.originalTemp.filter((d)=>{
+
+                                let arrTemps = d.temperament.split(", ");
+                                    if(arrTemps.includes(action.payload.data))
+                                       return d;
+
+                                  
+                            });
+                          
+                            return{
+                                ...state,
+                                dogs:[...filtered]
+                            }
+                        }
+                         if(action.payload.data==="All" && !action.payload.filter )
+                        return{
+                            ...state,
+                            dogs : [...state.originalTemp]
+                        }
+                        if(action.payload.data==="All" && action.payload.filter )
+                        return{
+                            ...state,
+                            search_results : [...state.originalTemp]
+                        }
+                        
+                       
+
+                   
+                   
+
+                    
+
+                         
+
+                 
+                   
                        
                        
                         
@@ -339,3 +410,65 @@ const reducer = (state = initialState, action) => {
   
 
   export default reducer;
+
+
+  /*
+
+  if(state.filterTemp.length<6 && action.payload.data!=="All")
+                    state.filterTemp.push(action.payload.data);
+                    
+                  
+                    console.log(state.filterTemp);
+
+                    if( action.payload.data==="All")
+                        {
+                            return{
+                                ...state,
+                                filterTemp: [],
+                                search_results : [...state.originalSearch],
+                                dogs: [...state.originalDog]
+                            } 
+                        }
+                    if(!action.payload.filter && action.payload.data!=="All")
+                        {
+                            let filtered = [];
+                            console.log(state.dogs);
+                           state.dogs.filter((d)=>
+                            {
+                               
+                                let test = d.temperament.split(", ");
+                                console.log(test);
+                                    for(let i = 0;i<state.filterTemp.length;i++)
+                                        if(test.includes(state.filterTemp[i]))
+                                               filtered.push(d);
+                                    
+                            })
+                                filtered = [...new Map(filtered.map(v => [v.name, v])).values()];
+                            return{
+                                ...state,
+                                dogs : [...filtered]
+                            } 
+                        }
+                        else if(action.payload.filter && action.payload.data!=="All")
+                        {
+                            let filtered = [];
+                            state.search_results.filter((d)=>
+                             {
+                                
+                                 let test = d.temperament.split(", ");
+                                 console.log(test);
+                                     for(let i = 0;i<state.filterTemp.length;i++)
+                                         if(test.includes(state.filterTemp[i]))
+                                                filtered.push(d);
+                                     
+                             })
+                             filtered = [...new Map(filtered.map(v => [v.name, v])).values()];
+                             return{
+                                 ...state,
+                                 search_results : [...filtered]
+                             } 
+
+                        }
+
+
+  */
