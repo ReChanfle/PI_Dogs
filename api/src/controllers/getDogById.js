@@ -7,7 +7,7 @@ async function getDogById(req,res){
 
    
     const {idRaza} = req.params;
- 
+ //chequeo que el params sea numero o no para pedir la info a la APi o al back
         if(Number(idRaza))
             apiId(idRaza,res);
         if(!Number(idRaza))
@@ -26,12 +26,13 @@ async function apiId(id,res)
 
             let arrOneDog = [];
                     
+            // mete el objeto dentro de un array para poder mapearlo
             arrOneDog.push(responseJson);
             
             //array parar devolver resultado
             let detailLocal = [];
     
-    
+        //hago un mao sobre el objeto para enviarlo al front los datos que necesito
             arrOneDog.map((d) => {
        
                 detailLocal.push({id:d.id,name: d.name, img: `https://cdn2.thedogapi.com/images/${d.reference_image_id}.jpg`,height: d.height.metric,weight: d.weight.metric,life_span: d.life_span,temperament:d.temperament});

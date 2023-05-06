@@ -36,7 +36,7 @@ async function geTemperaments(req,res){
             let finalObjectArr = [];
 
             responseApi.map((t)=>
-            { 
+            {                  
             arrTemperaments.push({temp: t.temperament})
 
             });
@@ -45,7 +45,7 @@ async function geTemperaments(req,res){
 
 
 
-
+              // hago un map para transformar los temperamentos string en array
              arrTemperaments.map((t)=> {
                 let arrString = t.temp.split(" ");
 

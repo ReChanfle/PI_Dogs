@@ -21,12 +21,12 @@ async function createDogs(req,res){
         const newDog = await Dogs.create({
             name: name,
             life_span: `${life_spanMin} - ${life_spanMax} years`,
-           height: `${heightMin} - ${heightMax}`, 
+            height: `${heightMin} - ${heightMax}`, 
             weight: `${weightMin} - ${weightMax}`,
             img: img_url,
            }) 
 
-           const temps = await Temperaments.findAll({where: {name: temperaments  } });
+           const temps = await Temperaments.findAll({where: {name: temperaments  } }); 
 
            await newDog.addTemperaments(temps);
 

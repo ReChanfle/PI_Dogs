@@ -9,8 +9,52 @@
 }
 
 
-.custom-select {
-    position: relative;
-    font-family: sans-serif;
-    font-weight: 600;
+.paginate{
+   display:flex;
+   text-align: center;
+   justify-content: center;
+   
+
+}
+.cards-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+
+}
+.btn {
+    border: none;
+    padding: 12px 24px;
+    border-radius: 24px;
+    font-size: 12px;
+    font-size: 0.8rem;  
+    letter-spacing: 2px;  
+    cursor: pointer;
+    margin:5px;
+  }
+
+.outline {
+    background: transparent;
+    color: rgba(9, 231, 239, 0.9);
+    border: 1px solid rgba(5, 7, 8, 0.6);
+    transition: all .3s ease;
+    
+  }
+  
+  .outline:hover{
+    transform: scale(1.125);
+    color: rgba(243, 20, 33, 0.9);
+    border-color: rgba(255, 255, 255, 0.9);
+    transition: all .3s ease;  
+  }
+
+  .fontPage{
+    font-family: 'Righteous', sans-serif;
+    color: rgba(147, 120, 252, 0.98);
+    text-transform: uppercase;
+    margin-left:1rem;
+    margin-right:1rem;
+    font-size: 1rem;
   }

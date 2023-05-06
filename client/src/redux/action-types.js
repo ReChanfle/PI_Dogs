@@ -10,8 +10,8 @@ const FILTER_ZA ='FILTER_ZA';
 const FILTER_WEIGHT = 'FILTER_WEIGHT';
 const FILTER_API = 'FILTER_API';
 const FILTER_TEMP = 'FILTER_TEMP';
-const CHANGE_PAGE = 'CHANGE_PAGE';
-const CHANGE_PAGE_SEARCH = 'CHANGE_PAGE_SEARCH';
+const SAVE_PAGE = 'SAVE_PAGE';
+
 
 module.exports = {
     ADD_NICKNAME,
@@ -26,8 +26,7 @@ module.exports = {
     FILTER_WEIGHT,
     FILTER_API,
     FILTER_TEMP,
-    CHANGE_PAGE,
-    CHANGE_PAGE_SEARCH 
+    SAVE_PAGE
    
     
 }

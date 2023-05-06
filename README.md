@@ -218,12 +218,12 @@ Se debe desarrollar una aplicación utilizando **React** y **Redux** que conteng
 **📍 FORM PAGE |**: en esta vista se encontrará el formulario para crear una nueva raza de perro.
 
 Este formulario debe ser **controlado completamente con JavaScritp**. No se pueden utilizar validaciones HTML, ni utilizar librerías especiales para esto. Debe contar con los siguientes campos:
-
+a
 -  Nombre.
 -  Altura **(diferenciar entre altura mínima y máxima de la raza)**.
 -  Peso **(diferenciar entre peso mínimo y máximo de la raza)**.
 -  Años de vida.
--  Posibilidad de seleccionar/agregar varios temperamentos en simultáneo.
+-  Posibilidad de seleccionar/agregr varios temperamentos en simultáneo.
 -  Botón para crear la nueva raza.
 
 > [**IMPORANTE**]: es requisito que el formulario de creación esté validado sólo con JavaScript. Puedes agregar las validaciones que consideres. Por ejemplo: que el nombre de la raza no pueda contener números, o que el peso/altura mínimo no pueda ser mayor al máximo.
