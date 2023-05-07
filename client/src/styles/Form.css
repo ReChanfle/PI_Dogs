@@ -2,11 +2,11 @@
   align-items: center;
   display:flex;
   justify-content: center;
-  height: 600px;
+  height:10rem;
 }
 
 .form {
- 
+
   border-radius: 20px;
   box-sizing: border-box;
   height: 500px;
