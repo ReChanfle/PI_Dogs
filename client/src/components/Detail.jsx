@@ -27,6 +27,8 @@ export default function Detail()
 
       const URL = "https://w7.pngwing.com/pngs/394/518/png-transparent-brown-shiba-inu-doge-weather-shiba-inu-doge-click-doge-snake-doge-miscellaneous-mammal-carnivoran-thumbnail.png";
    
+
+      if(stateId.length>0)
       if(stateId[0].img.includes('undefined') || stateId[0].img=="https://cdn2.thedogapi.com/images/.jpg")
       stateId[0].img = URL;
 

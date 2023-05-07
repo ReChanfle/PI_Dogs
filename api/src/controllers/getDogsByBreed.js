@@ -63,7 +63,7 @@ async function getDogsByBreed(req,res){
     
                 finalArr =  finalLocals.concat(finalAPI);
     
-              
+                console.log(  finalArr );
     
                     res.status(200).json(finalArr);
           

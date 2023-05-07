@@ -234,48 +234,89 @@ const reducer = (state = initialState, action) => {
                        
                         //state.search_results = [...state.originalSearch];
                         if(action.payload.data==="Custom")
-                        state.filteredSearch = state.filteredSearch.filter((d)=>  {
-                            if(typeof d.id === 'string') 
-                                    return d
-                         })
+                        {
+                            state.pagination = 1;
+                            state.filteredSearch = state.filteredSearch.filter((d)=>  {
+                          
+                                if(typeof d.id === 'string') 
+                                        return d
+                             });
+                             return{
+                                ...state,
+                                search_results: [...state.filteredSearch]
+                             }
+                        }
+                       
                          //state.search_results = [...state.originalSearch];
                          if(action.payload.data==="API")
-                         state.filteredSearch = state.filteredSearch.filter((d)=>  {
-                            if(typeof d.id === 'number') 
-                                return d
-                         } )
-                         if(action.payload.data==="All")
-                         state.filteredSearch = [...state.originalSearch]
-                         return{
-                            ...state,
-                            search_results: [...state.filteredSearch]
+                         {
+                            //state.pagination = 1;
+                            state.filteredSearch = state.filteredSearch.filter((d)=>  {
+                                if(typeof d.id === 'number') 
+                                    return d
+                             });
+                             return{
+                                ...state,
+                                search_results: [...state.filteredSearch]
+                             }
                          }
+                         
+                         if(action.payload.data==="All")
+                         {
+                            //state.pagination = 1;
+                            state.filteredSearch = [...state.originalSearch]
+                            return{
+                               ...state,
+                               search_results: [...state.filteredSearch]
+                            }
+                         }
+                        
                     }
                     else
                     {
                         if(action.payload.data==="Custom")
-                        state.filteredHome = state.originalDog.filter((d)=>  {
-                            if(typeof d.id === 'string') 
-                                    return d
-                         })
+                        {
+                           state.pagination = 1;
+                            state.filteredHome = state.originalDog.filter((d)=>  {
+                                if(typeof d.id === 'string') 
+                                        return d
+                             });
+                             return{
+                                ...state,
+                                dogs: [...state.filteredHome]
+                             }
+                        }
+                       
                          //state.dogs = [...state.originalDog];
                          if(action.payload.data==="API")
-                         state.filteredHome = state.originalDog.filter((d)=>  {
-                            if(typeof d.id === 'number') 
-                                return d
-                         } )
-                         if(action.payload.data==="All")
-                         state.filteredHome = [...state.originalDog]
-                       
-                         return{
-                            ...state,
-                            dogs: [...state.filteredHome]
+                         {
+                            //state.pagination = 1;
+                            state.filteredHome = state.originalDog.filter((d)=>  {
+                                if(typeof d.id === 'number') 
+                                    return d
+                             });
+                             return{
+                                ...state,
+                                dogs: [...state.filteredHome]
+                             }
                          }
+                       
+                         if(action.payload.data==="All")
+                         {
+                            //state.pagination = 1;
+                            state.filteredHome = [...state.originalDog]
+                            return{
+                               ...state,
+                               dogs: [...state.filteredHome]
+                            }
+                         }
+                        
 
                     } 
                 case FILTER_TEMP:
                         if(action.payload.filter && action.payload.data!=="All")
                         {
+                            //state.pagination = 1;
                                 state.filteredSearch = state.originalSearch.filter((d)=>{
                                     if(d.temperament)
                                     return d.temperament.includes(action.payload.data)
@@ -289,6 +330,7 @@ const reducer = (state = initialState, action) => {
                         }
                         else if(!action.payload.filter && action.payload.data!=="All")
                         {
+                            //state.pagination = 1;
                             state.filteredHome = state.originalDog.filter((d)=>{
                                 if(d.temperament)
                                 return d.temperament.includes(action.payload.data)

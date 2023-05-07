@@ -16,16 +16,9 @@ export default function CreateDog()
         dispatch(get_temperament());
         }, []);
 
-   
-
-
     const temperaments = useSelector((state)=> state.temperaments);
 
-    
-
     const postData = useSelector((state)=> state.estadoPostDog);
-
-    const [idTemps, setIdTemps] = useState([]);
 
     const [arrTemps,setTemps] = useState([]);
 
@@ -34,7 +27,6 @@ export default function CreateDog()
         life_spanMin: 0,
         life_spanMax: 0,
         temperaments: [],
-        IDs: [],
         heightMin: 0,
         heightMax: 0,
         weightMin: 0,
@@ -65,18 +57,16 @@ export default function CreateDog()
     {
          //cuando el usuario clikea sobre el elemento se vacian los estados de temperamentos 
      setTemps([]);
-     setIdTemps([]);
      setData({
         ...data,
         temperaments: [],
-        IDs: []
      })
     }
   
     function handleSelect(event)
     {
 
-        
+
 
         if(data.temperaments.length<=5){
 
@@ -84,17 +74,10 @@ export default function CreateDog()
         
             arrTemps.push(dataFromSelect[0]);
     
-            idTemps.push(dataFromSelect[1]);
-
-            //elimino duplicados de ids y temps
-            let auxTemps =  [...new Set(arrTemps)];
-            let auxIds = [...new Set(idTemps)];
-           
 
             setData({
                 ...data,
                 temperaments: arrTemps,
-                IDs: idTemps,
             })
         }
   
@@ -109,7 +92,6 @@ export default function CreateDog()
                 life_spanMin: 0,
                 life_spanMax: 0,
                 temperaments: [],
-                IDs: [],
                 heightMin: 0,
                 heightMax: 0,
                 weightMin: 0,
@@ -117,7 +99,7 @@ export default function CreateDog()
                 img_url: ''
               })
               setTemps([]);
-              setIdTemps([]);
+             
     
     }
    

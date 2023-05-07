@@ -6,7 +6,7 @@ async function getDogById(req,res){
 
 
    
-    const {idRaza} = req.params;
+    const {idRaza} = req.params; 
  //chequeo que el params sea numero o no para pedir la info a la APi o al back
         if(Number(idRaza))
             apiId(idRaza,res);
