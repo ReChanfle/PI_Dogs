@@ -44,7 +44,7 @@ export const get_temperament=()=>{
 }
 
 export const getDogsById=(id)=>{
-
+  console.log(id);
   return async function (dispatch)
   {
     const response = await fetch(`http://localhost:3001/dogs/${id}`);
@@ -52,7 +52,7 @@ export const getDogsById=(id)=>{
     const responsJson = await response.json();
 
     try{
-     
+    
       dispatch({type: GET_ID,payload:responsJson});
     }
     catch(err)
@@ -72,8 +72,7 @@ export const add_nickname=(nick)=>{
 
 export const post_dogs=(data)=>{
 
-       
-
+      
   return async function (dispatch)
   {
     

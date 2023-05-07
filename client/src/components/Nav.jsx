@@ -1,20 +1,23 @@
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { savePage } from '../redux/actions.js';
 import SearchBar from './SearchBar.jsx';
 import '../styles/Nav.css';
 
 function Nav({onSearch,logOut,deleteSearch}) {
 
-    
-        const user = useSelector((state)=> state.nickname);
+      const dispatch = useDispatch();
+
+      const user = useSelector((state)=> state.nickname);
      
-        function handleSubmit(event)
+      //boton para desloguearse
+      function handleSubmit(event)
         {
                 event.preventDefault();
                 logOut(false);
 
         }
-        function responsiveNav() {
+      function responsiveNav() {
           var x = document.getElementById("myTopnav");
           if (x.className === "topnav") {
             x.className += " responsive";
@@ -23,19 +26,13 @@ function Nav({onSearch,logOut,deleteSearch}) {
           }
         }
 
-        function handleDelete(event)
+      function handleDelete(event)
         {
-
+          //seteo pagination a 1 para volver al menu principal y no romper el limit de paginas
+            dispatch(savePage(1));
             deleteSearch(false);
 
         }
-
-       
-
-       
-
-        
-
 
         const styleLogo = {
           width: '45px',
@@ -49,36 +46,7 @@ function Nav({onSearch,logOut,deleteSearch}) {
 
    return (
 
-   /* <nav >
-    <ul>
-      <li>
-        <Link   to="/home">
-                <img src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/c50a4a55883023.5996f8afa3f5c.gif" style={styleLogo}/> 
-              </Link>
-      </li>
-      <li>
-        <Link to="/About">
-                <a >About</a>
-              </Link>
-       
-      </li>
-      <li>
-         <Link to="/favorites">
-                <a  >Favs</a>
-              </Link>
-      </li>
-      <li>
-        <a href="#">Services</a>
-      </li>
-      <li>
-        <SearchBar onSearch={onSearch} />
-            <form   role="search" onSubmit={handleSubmit}>
-                          <button  type="submit">Logout</button>
-                      </form>  
-      </li>
-        
-    </ul>
-  </nav> */
+  
 
   <div className="topnav " id="myTopnav" >
    

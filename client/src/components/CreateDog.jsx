@@ -76,7 +76,10 @@ export default function CreateDog()
     function handleSelect(event)
     {
 
+        
+
         if(data.temperaments.length<=5){
+
             let dataFromSelect = event.target.value.split(",");
         
             arrTemps.push(dataFromSelect[0]);

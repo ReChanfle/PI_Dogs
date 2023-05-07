@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../styles/Nav.css';
 import { useDispatch,useSelector } from 'react-redux';
 import { searchDogs } from '../redux/actions';
-
+import { savePage } from '../redux/actions';
 
 export default function SearchBar({onSearch}) {
 
@@ -18,8 +18,11 @@ export default function SearchBar({onSearch}) {
     if (event.key === 'Enter') {
        if(event.target.value)
        {
+         //envio datos al reducer para buscar los perros
         dispatch(searchDogs(event.target.value));
-
+        //seteo pagination a 1 para volver al menu principal y no romper el limit de paginas
+         dispatch(savePage(1));
+         //envio al App el valor de search en true, para que renderice los perros de busqueda
         onSearch(true);
     
        }

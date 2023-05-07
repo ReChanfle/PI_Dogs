@@ -1,9 +1,13 @@
 import '../styles/Card.css'
 import { Link } from "react-router-dom";
 
-
 export default function Card({d}){
 
+    //seteo una img default para los que no tienen img
+     const URL = "https://w7.pngwing.com/pngs/394/518/png-transparent-brown-shiba-inu-doge-weather-shiba-inu-doge-click-doge-snake-doge-miscellaneous-mammal-carnivoran-thumbnail.png";
+   
+     if(d.img.includes('undefined') || d.img=="https://cdn2.thedogapi.com/images/.jpg")
+     d.img = URL;
 
 
     const styleImg ={
@@ -17,7 +21,7 @@ export default function Card({d}){
             <div className="container" >
             <div className="wrapper" >
                <div className="banner-image"> 
-              <img src={d.img} style={styleImg} alt='img_profile' /> 
+              <img src={d.img} style={styleImg} alt='img_dog' /> 
                </div>
                 <h1>{d.name}</h1>
                   <p>Weight: {d.weight}</p>

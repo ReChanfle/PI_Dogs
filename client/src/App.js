@@ -21,7 +21,6 @@ function App() {
   useEffect(()=>{
     document.title = 'PI-Dogs';
       dispatch(getDogs());
-
   },[])
 
 
