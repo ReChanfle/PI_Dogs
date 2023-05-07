@@ -34,3 +34,10 @@
     width: 50%;
     height: 200%;
 }
+
+h1{
+    font-family: 'Righteous', sans-serif;
+    color: rgba(147, 120, 252, 0.98);
+    text-transform: uppercase;
+    font-size: 1.5rem;
+  }

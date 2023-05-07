@@ -16,8 +16,7 @@ async function geTemperaments(req,res){
 
         if(locales.length!==0)
         {
-            //elimino posibles duplicados funcion duplicada
-            //const noDuplicatesLocals = [...new Map(locales.map(v => [v.name, v])).values()];
+          
             return  res.status(200).json(locales);
 
         }
@@ -25,6 +24,8 @@ async function geTemperaments(req,res){
 
        if(responseApi)
         {
+
+          // array locales para armar el array de objetos que se enviara al front
             let cleanFinalArr = [];
 
             let arrTemperaments =[];
@@ -35,6 +36,7 @@ async function geTemperaments(req,res){
 
             let finalObjectArr = [];
 
+            //transformo el array que viene de la API, en un array de objetos con una key name y un value de string de temperamentos
             responseApi.map((t)=>
             {                  
             arrTemperaments.push({temp: t.temperament})

@@ -1,9 +1,10 @@
 import '../styles/Form.css';
 import { useState } from "react";
 import { add_nickname } from '../redux/actions';
-import { useDispatch,useSelector } from 'react-redux';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import {  useNavigate } from 'react-router-dom';
 import validateForm from '../validation';
+
 export default function Form({login})
 {
 
@@ -11,12 +12,10 @@ export default function Form({login})
 
     const [valid,setValid] = useState(false);
 
-    //redux funcional
     const dispatch = useDispatch();
 
-   
+    const navigate = useNavigate();
 
-    
 
     const styleLogo = {
         width: '160px',
@@ -55,7 +54,7 @@ export default function Form({login})
         if(valid && nickname.length>0)
         {
             dispatch(add_nickname(nickname));
-            login(nickname);
+            navigate('/home');
         }
           
           

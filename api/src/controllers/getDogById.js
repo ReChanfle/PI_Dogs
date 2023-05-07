@@ -38,7 +38,7 @@ async function apiId(id,res)
                 detailLocal.push({id:d.id,name: d.name, img: `https://cdn2.thedogapi.com/images/${d.reference_image_id}.jpg`,height: d.height.metric,weight: d.weight.metric,life_span: d.life_span,temperament:d.temperament});
                         
             })
-            console.log(detailLocal); 
+          
                res.status(200).json(detailLocal);
     
         }
@@ -77,7 +77,7 @@ async function localId(id,res)
                     
         })
 
-        console.log(detailLocal);
+       
 
            res.status(200).json(detailLocal);
 

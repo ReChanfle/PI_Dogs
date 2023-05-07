@@ -51,8 +51,8 @@ export default function Filter({filter,dogs}){
      },[])
 
         return(
-            <div class="containerFilter" >
-            <div class="custom-select">
+            <div className="containerFilter" >
+            <div className="custom-select">
             <select   onChange={handleAz} >
                  <option  value="A">A-Z</option>
                  <option value="Z">Z-A</option>

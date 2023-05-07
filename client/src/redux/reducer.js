@@ -1,7 +1,4 @@
-
 import { ADD_NICKNAME,FILTER_AZ,GET_DATA, GET_ID, GET_TEMPERAMENTS, POST_DOGS, RESET_MESSAGE,SEARCH_DOG,FILTER_WEIGHT,FILTER_API,FILTER_TEMP,SAVE_PAGE } from "./action-types";
-
-
 
 const initialState = {
    nickname: '',
@@ -19,8 +16,6 @@ const initialState = {
    filteredHome: [],
    filteredSearch:[]
   };
-
-
 
 const reducer = (state = initialState, action) => {
         switch(action.type)
@@ -62,13 +57,13 @@ const reducer = (state = initialState, action) => {
             case RESET_MESSAGE:
                 return{
                     ...state,
-                    estadoPostDog: action.payload
+                    estadoPostDog: action.payload // mensaje se creacion de perro
                 }
             case SEARCH_DOG:
-
+                //se usan 3 arrays distintos para su posterior utilizacion en filtros
                 return{
                     ...state,
-                    search_results: action.payload,//action.payload.length>10 ? action.payload.slice(0,10): action.payload,
+                    search_results: action.payload,
                     originalSearch : [...action.payload],
                     filteredSearch : [...action.payload]
                 }
@@ -232,7 +227,7 @@ const reducer = (state = initialState, action) => {
                     if(action.payload.filter)
                     {   
                        
-                        //state.search_results = [...state.originalSearch];
+                      
                         if(action.payload.data==="Custom")
                         {
                             state.pagination = 1;
@@ -247,10 +242,10 @@ const reducer = (state = initialState, action) => {
                              }
                         }
                        
-                         //state.search_results = [...state.originalSearch];
+                       
                          if(action.payload.data==="API")
                          {
-                            //state.pagination = 1;
+                           
                             state.filteredSearch = state.filteredSearch.filter((d)=>  {
                                 if(typeof d.id === 'number') 
                                     return d
@@ -263,7 +258,7 @@ const reducer = (state = initialState, action) => {
                          
                          if(action.payload.data==="All")
                          {
-                            //state.pagination = 1;
+                           
                             state.filteredSearch = [...state.originalSearch]
                             return{
                                ...state,
@@ -276,6 +271,8 @@ const reducer = (state = initialState, action) => {
                     {
                         if(action.payload.data==="Custom")
                         {
+                            //seteo el numero de pagina a 1 ya que si los resultados son menores que el valor anterior se rompe
+                            // el paginado
                            state.pagination = 1;
                             state.filteredHome = state.originalDog.filter((d)=>  {
                                 if(typeof d.id === 'string') 
@@ -290,7 +287,7 @@ const reducer = (state = initialState, action) => {
                          //state.dogs = [...state.originalDog];
                          if(action.payload.data==="API")
                          {
-                            //state.pagination = 1;
+                          
                             state.filteredHome = state.originalDog.filter((d)=>  {
                                 if(typeof d.id === 'number') 
                                     return d
@@ -303,7 +300,7 @@ const reducer = (state = initialState, action) => {
                        
                          if(action.payload.data==="All")
                          {
-                            //state.pagination = 1;
+                            
                             state.filteredHome = [...state.originalDog]
                             return{
                                ...state,
@@ -316,7 +313,7 @@ const reducer = (state = initialState, action) => {
                 case FILTER_TEMP:
                         if(action.payload.filter && action.payload.data!=="All")
                         {
-                            //state.pagination = 1;
+                            state.pagination = 1;
                                 state.filteredSearch = state.originalSearch.filter((d)=>{
                                     if(d.temperament)
                                     return d.temperament.includes(action.payload.data)
@@ -330,7 +327,7 @@ const reducer = (state = initialState, action) => {
                         }
                         else if(!action.payload.filter && action.payload.data!=="All")
                         {
-                            //state.pagination = 1;
+                            state.pagination = 1;
                             state.filteredHome = state.originalDog.filter((d)=>{
                                 if(d.temperament)
                                 return d.temperament.includes(action.payload.data)

@@ -1,27 +1,5 @@
 import { ADD_NICKNAME,GET_DATA,GET_ID,GET_TEMPERAMENTS,POST_DOGS,RESET_MESSAGE, SEARCH_DOG,FILTER_AZ,FILTER_WEIGHT,FILTER_TEMP,FILTER_API,SAVE_PAGE } from "./action-types";
 
-
-//rehacer con el back 
-export const getDogs=()=>{
-
-    return async function (dispatch)
-    {
-      const response = await fetch(`http://localhost:3001/dogs`);
-      
-      const responsJson = await response.json();
-
-      try{
-       
-        dispatch({type: GET_DATA,payload:responsJson});
-      }
-      catch(err)
-      {
-        console.log(err.message);
-      }
-    }
-
-
-}
 export const get_temperament=()=>{
 
   return async function (dispatch)
@@ -33,6 +11,33 @@ export const get_temperament=()=>{
     try{
      
       dispatch({type: GET_TEMPERAMENTS,payload:responsJson});
+    }
+    catch(err)
+    {
+      console.log(err.message);
+    }
+  }
+}
+
+////// LOGIN
+
+export const add_nickname=(nick)=>{
+
+    return{type:ADD_NICKNAME,payload:nick}
+
+}
+////// RUTAS
+export const getDogs=()=>{
+
+  return async function (dispatch)
+  {
+    const response = await fetch(`http://localhost:3001/dogs`);
+    
+    const responsJson = await response.json();
+
+    try{
+     
+      dispatch({type: GET_DATA,payload:responsJson});
     }
     catch(err)
     {
@@ -60,13 +65,6 @@ export const getDogsById=(id)=>{
       console.log(err.message);
     }
   }
-
-}
-
-
-export const add_nickname=(nick)=>{
-
-    return{type:ADD_NICKNAME,payload:nick}
 
 }
 
@@ -127,7 +125,7 @@ export const searchDogs=(name)=>{
     }
   }
 }
-
+////// FILTROS
 export const filterAZ=(data)=>{
 
   
@@ -156,7 +154,7 @@ export const filterTemp=(data)=>{
   return{type: FILTER_TEMP,payload:data}
   
 }
-
+////// PAGINACION
 
 export const savePage=(data)=> {
 

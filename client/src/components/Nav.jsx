@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
-import { savePage } from '../redux/actions.js';
+import { add_nickname, savePage } from '../redux/actions.js';
 import SearchBar from './SearchBar.jsx';
 import '../styles/Nav.css';
 
@@ -14,7 +14,8 @@ function Nav({onSearch,logOut,deleteSearch}) {
       function handleSubmit(event)
         {
                 event.preventDefault();
-                logOut(false);
+           
+                dispatch(add_nickname(""))
 
         }
       function responsiveNav() {
@@ -34,14 +35,6 @@ function Nav({onSearch,logOut,deleteSearch}) {
 
         }
 
-        const styleLogo = {
-          width: '45px',
-          heigth: '45px'
-        }
-        const styleExpandNavLogo ={
-          width: '35px',
-          heigth: '35px'
-        }
        
 
    return (

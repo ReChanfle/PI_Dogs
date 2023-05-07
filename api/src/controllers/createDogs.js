@@ -13,7 +13,7 @@ async function createDogs(req,res){
     try{
 
    
-    //let tempArray = Object.values(temperaments);
+    
    
         //checkeo que el perro no exista para crearlo
     if(!checkIfexist)
@@ -25,9 +25,9 @@ async function createDogs(req,res){
             weight: `${weightMin} - ${weightMax}`,
             img: img_url,
            }) 
-
+           //busco los temperamentos en la tabla temperaments local
            const temps = await Temperaments.findAll({where: {name: temperaments  } }); 
-
+           //realizo la relacion con la funcion de sequelize
            await newDog.addTemperaments(temps);
 
            res.status(200).json({message: "Perro creado",status: true});
