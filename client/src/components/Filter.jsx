@@ -2,24 +2,19 @@ import '../styles/Filter.css';
 import { useDispatch,useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { get_temperament,filterAPI,filterAZ,filterTemp,filterWeight } from '../redux/actions';
+
 export default function Filter({filter,dogs}){
 
     useEffect(()=>{
       
         dispatch(get_temperament());
-        
-  
+    
     },[])
 
     const dispatch = useDispatch();
 
     const temperaments = useSelector((state)=> state.temperaments);
 
-    
-    
-   
-   
-      
     function handleTemps(event)
     {
         let dataFromSelect = event.target.value.split(",");
@@ -29,29 +24,28 @@ export default function Filter({filter,dogs}){
 
     function handleApiOrCustom(event)
     {
-           
-
-            dispatch(filterAPI({data: event.target.value,filter:filter}));
+        dispatch(filterAPI({data: event.target.value,filter:filter}));
     }
 
     function handleAz(event)
     {
           
-            dispatch(filterAZ({data: event.target.value,filter: filter}));
+        dispatch(filterAZ({data: event.target.value,filter: filter}));
     }
 
     function handleWeight(event)
     {
-         
-            dispatch(filterWeight({data: event.target.value,filter: filter}));
+        dispatch(filterWeight({data: event.target.value,filter: filter}));
     }
     
-    useEffect(()=>{
-        //return ()=> dispatch(original());
-     },[])
+    //useEffect(()=>{
+        
+   //  },[filter])
 
         return(
+          
             <div className="containerFilter" >
+                  <h2>Filters:</h2>
             <div className="custom-select">
             <select   onChange={handleAz} >
                  <option  value="A">A-Z</option>
@@ -68,9 +62,9 @@ export default function Filter({filter,dogs}){
                             {temperaments.map(d => (                    
                                 <option value={[d.name,d.id]} key={d.id} className="">{d.name}</option> //key de elementos de temperamentos, eliminar el repetido reserved
                             ))}
-                        </select>
+            </select>
 
-             <select onChange={handleApiOrCustom}  >
+             <select  onChange={handleApiOrCustom}  >
                 <option  value="All">All</option>
                 <option  value="API">API</option>
                 <option value="Custom">Custom</option>

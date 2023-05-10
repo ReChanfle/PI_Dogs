@@ -4,7 +4,7 @@ import { add_nickname, savePage } from '../redux/actions.js';
 import SearchBar from './SearchBar.jsx';
 import '../styles/Nav.css';
 
-function Nav({onSearch,logOut,deleteSearch}) {
+function Nav({onSearch,deleteSearch}) {
 
       const dispatch = useDispatch();
 
@@ -13,10 +13,8 @@ function Nav({onSearch,logOut,deleteSearch}) {
       //boton para desloguearse
       function handleSubmit(event)
         {
-                event.preventDefault();
-           
-                dispatch(add_nickname(""))
-
+          event.preventDefault();
+          dispatch(add_nickname(""));
         }
       function responsiveNav() {
           var x = document.getElementById("myTopnav");

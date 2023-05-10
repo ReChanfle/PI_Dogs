@@ -1,8 +1,8 @@
 
 
-export default function Error(){
+export default function Error({user}){
 
-        console.log("asdad");
+    
 
 
     return(

@@ -20,8 +20,10 @@ export default function CreateDog()
 
     const postData = useSelector((state)=> state.estadoPostDog);
 
+    //estado local para almacenar los temperamentos 
     const [arrTemps,setTemps] = useState([]);
 
+    //estado local para enviar los datos al back
     const [data, setData] = useState({
         name: "",
         life_spanMin: 0,
@@ -34,6 +36,7 @@ export default function CreateDog()
         img_url: ''
       });
 
+      //hook para limpiar el form cuando el 
       useEffect(() => {
        
       CleanForm();
@@ -125,66 +128,74 @@ export default function CreateDog()
 
 
         return(
-            <div className="divForm">
-                 <form className="Form" onSubmit={handleSubmit}>
+            <div className="divFormCreate">
+                 <form className="formCreate" onSubmit={handleSubmit}>
                 <img src='https://i.postimg.cc/6QcSpb0d/login-img.png'  style={styleLogo} alt="..."/>
                         <p className="title">Create Dog:</p>
 
+                      
+                    <div className="input-container ic1">
                         <p className="subtitle">Name:</p>
-                    <div className="input-container ic1">
-                        <input className="input" placeholder="" name="name" onChange={handleChange} value={data.name} />
-                        {validate(data).name ? <p>bien</p>: <p>mal</p>}
+                        <input className="input" placeholder="Choose a valid name" name="name" onChange={handleChange} value={data.name} />
+                        {validate(data).name ? <h1 className="messageValidation">Seems Good</h1>: <h1 className="messageValidation">only letters max 40 chars, minimum 2</h1>}
                         </div>
 
+                    <div className="input-container ic1">
                         <h1 className="subtitle">Height-min:</h1>
-                    <div className="input-container ic1">
-                        <input className="input" placeholder=""  name="heightMin" onChange={handleChange} value={data.heightMin} />
-                        {validate(data).heightMin ? <p>bien</p>: <p>mal</p>}
+                        <input className="input" placeholder="Pick a valid height, only numbers"  name="heightMin" onChange={handleChange} value={data.heightMin} />
+                        {validate(data).heightMin ? <h1 className="messageValidation">Seems Good</h1>: <h1 className="messageValidation">Beetwen 1 and 99 and less than height-max</h1>}
                         </div>
 
+                      
+                    <div className="input-container ic1">
                         <h1 className="subtitle">Height-max:</h1>
-                    <div className="input-container ic1">
-                        <input className="input" placeholder="" name="heightMax" onChange={handleChange} value={data.heightMax} />
-                        {validate(data).heightMax ? <p>bien</p>: <p>mal</p>}
+                        <input className="input" placeholder="Pick a valid height, only numbers" name="heightMax" onChange={handleChange} value={data.heightMax} />
+                        {validate(data).heightMax ? <h1 className="messageValidation">Seems Good</h1> :  <h1 className="messageValidation">Beetwen 1 and 99 and more than height-max</h1>}
                         </div>
 
+                      
+                    <div className="input-container ic1">
                         <h1 className="subtitle">weigth-min:</h1>
-                    <div className="input-container ic1">
-                        <input className="input" placeholder="" name="weightMin" onChange={handleChange} value={data.weightMin} />
-                        {validate(data).weightMin ? <p>bien</p>: <p>mal</p>}
+                        <input className="input" placeholder="Pick a valid weight, only numbers" name="weightMin" onChange={handleChange} value={data.weightMin} />
+                        {validate(data).weightMin ?  <h1 className="messageValidation">Seems Good</h1> : <h1 className="messageValidation">Beetwen 1 and 99 and less than weight-max</h1>}
                         </div>
 
+                       
+                    <div className="input-container ic1">
                         <h1 className="subtitle">weigth-max:</h1>
-                    <div className="input-container ic1">
-                        <input className="input" placeholder="" name="weightMax" onChange={handleChange} value={data.weightMax} />
-                        {validate(data).weightMax ? <p>bien</p>: <p>mal</p>}
+                        <input className="input" placeholder="Pick a valid weight, only numbers" name="weightMax" onChange={handleChange} value={data.weightMax} />
+                        {validate(data).weightMax ?  <h1 className="messageValidation">Seems Good</h1> : <h1 className="messageValidation">Beetwen 1 and 99 and more than weight-max</h1>}
                         </div>
 
+                      
+                    <div className="input-container ic1">
                         <h1 className="subtitle">lifespan-min:</h1>
-                    <div className="input-container ic1">
-                        <input className="input" placeholder="" name="life_spanMin" onChange={handleChange} value={data.life_spanMin} />
-                        {validate(data).life_spanMin ? <p>bien</p>: <p>mal</p>}
+                        <input className="input" placeholder="Pick a valid life span, only numbers" name="life_spanMin" onChange={handleChange} value={data.life_spanMin} />
+                        {validate(data).life_spanMin ?  <h1 className="messageValidation">Seems Good</h1> :  <h1 className="messageValidation">Beetwen 1 and 99 and less than life-span</h1>}
                         </div>
 
+                        
+                    <div className="input-container ic1">
                         <h1 className="subtitle">lifespan-max:</h1>
-                    <div className="input-container ic1">
                         <input className="input" placeholder="" name="life_spanMax" onChange={handleChange} value={data.life_spanMax} />
-                        {validate(data).life_spanMax ? <p>bien</p>: <p>mal</p>}
+                        {validate(data).life_spanMax ? <h1 className="messageValidation">Seems Good</h1> :<h1 className="messageValidation">Beetwen 1 and 99 and more than life-span-min</h1>}
                         </div>
 
-                        <h1 className="subtitle">img-url:</h1>
+                       
                     <div className="input-container ic1">
+                        <h1 className="subtitle">img-url:</h1>
                         <input className="input" placeholder="" name="img_url" onChange={handleChange} value={data.img_url} />
-                        {validate(data).img ? <p>bien</p>: <p>mal</p>}
+                        {validate(data).img ? <h1 className="messageValidation">Seems good!</h1>: <h1 className="messageValidation">only valids urls</h1>}
                         </div>
                      
 
-                        <h1 className="subtitle">temperament:</h1>
+                        
                     <div className="input-container ic1">
+                        <h1 className="subtitle">Temperament:</h1>
                         <input className="input" readOnly  name="temperaments" onClick={handleSearch} value={data.temperaments} />
-                        {validate(data).temperaments===6 ? <p>Limite de temperamentos</p> : validate(data).temperaments===0 ? <p>Debes tener al menos un temperament</p> : <p>Puedes agregar mas</p> }
+                        {validate(data).temperaments===6 ? <h1 className="messageValidation">Limits of temeperaments</h1> : validate(data).temperaments===0 ? <h1 className="messageValidation">You have to choose at least 1 temperament</h1> : <h1 className="messageValidation">You can choose more</h1> }
                         </div>
-                        <select className="" onChange={handleSelect}>
+                        <select className="ic1" onChange={handleSelect}>
                             <option disabled readOnly>Temperaments</option>
                             {temperaments.map(d => (                    
                                 <option value={[d.name,d.id]} key={d.id} className="">{d.name}</option> //key de elementos de temperamentos, eliminar el repetido reserved

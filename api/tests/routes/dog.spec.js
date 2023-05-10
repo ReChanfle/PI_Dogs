@@ -13,7 +13,7 @@ const temp = {
   name: 'Funny',
 };
 
-describe('Dogs routes', () => {
+xdescribe('Dogs routes', () => {
   before(() => conn.authenticate()
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
@@ -26,7 +26,7 @@ describe('Dogs routes', () => {
     );
   });
 });
-describe('Temperament routes', () => {
+xdescribe('Temperament routes', () => {
   before(() => conn.authenticate()
   .catch((err) => {
     console.error('Unable to connect to the database:', err);

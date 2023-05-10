@@ -12,19 +12,21 @@ export default function Card({d}){
 
     const styleImg ={
         width: '100%',
-        height:'200px'
+        height:'200px',
+        borderRadius: "4px"
 
 
     }
          
         return(
-            <div className="container" >
-            <div className="wrapper" >
+            <div className="container">
+            <div className="wrapper">
                <div className="banner-image"> 
               <img src={d.img} style={styleImg} alt='img_dog' /> 
                </div>
                 <h1>{d.name}</h1>
-                  <p>Weight: {d.weight}</p>
+                <p>Temperaments: {d.temperament}</p>
+                <p>Weight: {d.weight} kgs</p>
                 </div>
             <div className="button-wrapper"> 
                     <Link to={`/dogs/${d.id}`}>

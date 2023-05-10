@@ -14,7 +14,8 @@ const initialState = {
    search_results:[],
    originalSearch: [],
    filteredHome: [],
-   filteredSearch:[]
+   filteredSearch:[],
+  
   };
 
 const reducer = (state = initialState, action) => {
@@ -76,10 +77,10 @@ const reducer = (state = initialState, action) => {
                             {
                                 state.filteredSearch =  state.search_results.sort(function (a, b) {
                                     if (a.name > b.name) {
-                                      return 1;
+                                    return 1;
                                     }
                                     if (a.name < b.name) {
-                                      return -1;
+                                    return -1;
                                     }
                                   
                                     return 0;
@@ -114,10 +115,10 @@ const reducer = (state = initialState, action) => {
                             {
                                 state.filteredHome =  state.dogs.sort(function (a, b) {
                                     if (a.name > b.name) {
-                                      return 1;
+                                    return 1;
                                     }
                                     if (a.name < b.name) {
-                                      return -1;
+                                    return -1;
                                     }
                               
                                   });
@@ -126,15 +127,15 @@ const reducer = (state = initialState, action) => {
                             { 
                                 state.filteredHome =  state.dogs.sort(function (a, b) {
                                 if (a.name < b.name) {
-                                  return 1;
+                                return 1;
                                 }
                                 if (a.name > b.name) {
-                                  return -1;
+                                return -1;
                                 }
                               
                                 return 0;
                               });
-                                console.log(state.filteredHome);
+                               
                             }
                            // hay que usar spread operator porque sino react no detecta el cambio de valor, ya que la referencia no es modificada
                     return{
@@ -152,10 +153,10 @@ const reducer = (state = initialState, action) => {
                             const weigthA = parseInt(a.weight, 10);
                             const weigthB =parseInt(b.weight, 10);
                             if (weigthA < weigthB) {
-                              return -1;
+                            return -1;
                             }
                             if (weigthA > weigthB) {
-                              return 1;
+                            return 1;
                             }
                           
                             return 0;
@@ -167,10 +168,10 @@ const reducer = (state = initialState, action) => {
                             const weigthA = parseInt(a.weight, 10);
                             const weigthB =parseInt(b.weight, 10);
                             if (weigthA > weigthB) {
-                              return -1;
+                            return -1;
                             }
                             if (weigthA < weigthB) {
-                              return 1;
+                            return 1;
                             }
                           
                             return 0;
@@ -192,10 +193,10 @@ const reducer = (state = initialState, action) => {
                             const weigthB =parseInt(b.weight, 10);
                           
                             if (weigthA < weigthB) {
-                              return -1;
+                            return -1;
                             }
                             if (weigthA > weigthB) {
-                              return 1;
+                            return 1;
                             }
                           
                            
@@ -226,14 +227,15 @@ const reducer = (state = initialState, action) => {
             case FILTER_API:
                     if(action.payload.filter)
                     {   
-                       
+                       //uso el array temporal para guardar datos antes de filtrar
                       
+
                         if(action.payload.data==="Custom")
                         {
                             state.pagination = 1;
-                            state.filteredSearch = state.filteredSearch.filter((d)=>  {
+                            state.filteredSearch = state.originalSearch.filter((d)=>  {
                           
-                                if(typeof d.id === 'string') 
+                                if(!Number(d.id)) 
                                         return d
                              });
                              return{
@@ -246,11 +248,12 @@ const reducer = (state = initialState, action) => {
                          if(action.payload.data==="API")
                          {
                            
-                            state.filteredSearch = state.filteredSearch.filter((d)=>  {
-                                if(typeof d.id === 'number') 
+                            state.filteredSearch =  state.originalSearch.filter((d)=>  {
+                                if(Number(d.id)) 
                                     return d
                              });
-                             return{
+                             console.log(state.filteredSearch);
+                            return{
                                 ...state,
                                 search_results: [...state.filteredSearch]
                              }
@@ -258,11 +261,9 @@ const reducer = (state = initialState, action) => {
                          
                          if(action.payload.data==="All")
                          {
-                           
-                            state.filteredSearch = [...state.originalSearch]
                             return{
                                ...state,
-                               search_results: [...state.filteredSearch]
+                               search_results: [... state.originalSearch]
                             }
                          }
                         
@@ -275,9 +276,10 @@ const reducer = (state = initialState, action) => {
                             // el paginado
                            state.pagination = 1;
                             state.filteredHome = state.originalDog.filter((d)=>  {
-                                if(typeof d.id === 'string') 
-                                        return d
+                                if(!Number(d.id)) 
+                                    return d
                              });
+                             
                              return{
                                 ...state,
                                 dogs: [...state.filteredHome]
@@ -289,9 +291,10 @@ const reducer = (state = initialState, action) => {
                          {
                           
                             state.filteredHome = state.originalDog.filter((d)=>  {
-                                if(typeof d.id === 'number') 
-                                    return d
+                                if(Number(d.id)) 
+                                return d
                              });
+                            
                              return{
                                 ...state,
                                 dogs: [...state.filteredHome]
@@ -302,6 +305,7 @@ const reducer = (state = initialState, action) => {
                          {
                             
                             state.filteredHome = [...state.originalDog]
+                           
                             return{
                                ...state,
                                dogs: [...state.filteredHome]
@@ -313,8 +317,9 @@ const reducer = (state = initialState, action) => {
                 case FILTER_TEMP:
                         if(action.payload.filter && action.payload.data!=="All")
                         {
+                         
                             state.pagination = 1;
-                                state.filteredSearch = state.originalSearch.filter((d)=>{
+                                state.filteredSearch = state.filteredSearch.filter((d)=>{
                                     if(d.temperament)
                                     return d.temperament.includes(action.payload.data)
 
@@ -325,7 +330,7 @@ const reducer = (state = initialState, action) => {
 
                                 }
                         }
-                        else if(!action.payload.filter && action.payload.data!=="All")
+                         if(!action.payload.filter && action.payload.data!=="All")
                         {
                             state.pagination = 1;
                             state.filteredHome = state.originalDog.filter((d)=>{
@@ -340,7 +345,7 @@ const reducer = (state = initialState, action) => {
 
                             }
                         }
-                        else if(!action.payload.filter && action.payload.data==="All")
+                         if(!action.payload.filter && action.payload.data==="All")
                         {
                             return{
                                 ...state,
@@ -348,7 +353,7 @@ const reducer = (state = initialState, action) => {
 
                             }
                         }
-                        else if(action.payload.filter && action.payload.data==="All")
+                         if(action.payload.filter && action.payload.data==="All")
                         {
                             return{
                                 ...state,

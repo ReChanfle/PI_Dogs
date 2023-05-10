@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import {  useNavigate } from 'react-router-dom';
 import validateForm from '../validation';
 
-export default function Form({login})
+export default function Form()
 {
 
     const [nickname,setNickname] = useState('');
@@ -53,6 +53,7 @@ export default function Form({login})
         event.preventDefault();
         if(valid && nickname.length>0)
         {
+           
             dispatch(add_nickname(nickname));
             navigate('/home');
         }
@@ -68,7 +69,7 @@ export default function Form({login})
                 <img src='https://i.postimg.cc/6QcSpb0d/login-img.png' style={styleLogo} alt="..."/>
                         <h1 className="title">Nickname:</h1>
                     <div className="input-container ic1">
-                        <input className="input" placeholder="" value={nickname} onChange={handleInput}/>
+                        <input className="input" placeholder="Choose Nickname" value={nickname} onChange={handleInput}/>
                         {   
                          nickname.length>0 && valid ? <div className="alert" style={styleAlert}><strong>Seems Good!</strong></div> 
                          : <div className="alert" style={styleAlert2}><strong>Only letters</strong></div>  }

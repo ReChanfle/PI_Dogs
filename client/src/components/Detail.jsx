@@ -50,9 +50,10 @@ export default function Detail()
                             </div>
                             <div className='infoDetail'>
                                 <h3>Name: {stateId[0].name}</h3>
-                                <h3>Life Span: {stateId[0].life_span}</h3>
-                                <h3>Weight: {stateId[0].weight}</h3>
-                                <h3>Heigth: {stateId[0].height}</h3>
+                                <h3>Temperaments:{stateId[0].temperament} </h3>
+                                <h3>Life Span: {stateId[0].life_span} </h3>
+                                <h3>Weight: {stateId[0].weight} kgs</h3>
+                                <h3>Heigth: {stateId[0].height} cms</h3>
                                 <h3>ID: {stateId[0].id}</h3>
                                 <Link  to="/home">
                                 <img src="https://cdn-icons-png.flaticon.com/512/391/391123.png" style={styleLogo}/> 

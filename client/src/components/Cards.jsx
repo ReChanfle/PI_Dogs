@@ -25,16 +25,16 @@ export default function Cards({showDogs}){
 
    
 
+    const limitByPage = 8;
 
+    let limit = Math.floor(showDogs.length/limitByPage);
 
-    let limit = Math.floor(showDogs.length/10);
-
-    if(showDogs.length/10>limit)
+    if(showDogs.length/limitByPage>limit)
      limit = limit +1;
      
 
-    let start = (paginate-1)*10;
-    let end = paginate*10;
+    let start = (paginate-1)*limitByPage;
+    let end = paginate*limitByPage;
 
   
     let test = showDogs.slice(start,end);

@@ -2,7 +2,7 @@
 import './styles/App.css';
 import React, { useState,useEffect } from 'react';
 import { Route,Routes } from 'react-router-dom';
-import { useLocation, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import Form from './components/Form';
 import Nav from './components/Nav';
 import About from './components/About';
@@ -10,9 +10,9 @@ import CreateDog from './components/CreateDog';
 import Cards from './components/Cards';
 import Detail from './components/Detail';
 import Filter from './components/Filter';
-import Error from './components/Filter';
+import Error from './components/Error';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDogs,get_temperament,changePage } from './redux/actions';
+import { getDogs } from './redux/actions';
 
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
 
   const navigate = useNavigate();
 
-  
+    console.log(user);
 
   useEffect(() => {
 
@@ -49,13 +49,15 @@ function App() {
     
     }
     // si el usuario es  undefined se setea el acceso a false y se procede al login
-    else if(user==="")
+     if(user==="")
     {
       setAccess(false);
-      navigate('/');
-    }
+      navigate('/login');
+    } 
     
- }, [user]);
+ }, [user]);  
+
+ 
 
  
   //funcion para cambiar entre buscados o totales
@@ -70,21 +72,23 @@ function App() {
     setSearch(not_show);
 
   }
+
   
    
   
   return (
     <div className="App">
-          {access ? <Nav   onSearch={onSearch} deleteSearch={deleteSearch} /> : null }
-        
+          {access ? <Nav    onSearch={onSearch} deleteSearch={deleteSearch} /> : null }
+          
       <Routes>
-             <Route path="/" element={<Form   />}/>
-             <Route path="/about" element={<About />}/>
-             <Route path="/home" element={ <><Filter filter={search_or_all} dogs={search_or_all ? searchDogs : dogs} /><Cards  showDogs={search_or_all ? searchDogs : dogs}  /></>}/>
-             <Route path="/dogs/:id" element={ <Detail />}/>
-             <Route path="/createdogs/" element={ <CreateDog />}/>
-             <Route path="*" element={<Error />} />
+        <Route path="*" element={<Error  />} />
+        <Route path="/login" element={<Form />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/home" element={<><Filter filter={search_or_all} dogs={search_or_all ? searchDogs : dogs} /><Cards showDogs={search_or_all ? searchDogs : dogs} /></>} />
+        <Route path="/dogs/:id" element={<Detail />} />
+        <Route path="/createdogs/" element={<CreateDog />} />
       </Routes>
+    
     </div>
   );
 }
@@ -94,4 +98,22 @@ export default App;
 /* 
  <Route path="*" element={<Error />} />
  <Paginate filter={search_or_all}/>
+
+ return (
+    <div className="App">
+          {access ? <Nav   onSearch={onSearch} deleteSearch={deleteSearch} /> : null }
+          
+         
+      <Routes>
+     
+        <Route path="/login" element={<Form />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/home" element={<><Filter filter={search_or_all} dogs={search_or_all ? searchDogs : dogs} /><Cards showDogs={search_or_all ? searchDogs : dogs} /></>} />
+        <Route path="/dogs/:id" element={<Detail />} />
+        <Route path="/createdogs/" element={<CreateDog />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+    
+    </div>
+  );
  */

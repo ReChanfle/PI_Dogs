@@ -56,7 +56,7 @@ const URL = `https://api.thedogapi.com/v1/breeds`;
             return 0;
           });
 
-             res.status(200).json( finalResponse);
+             res.status(200).json(finalResponse);
         
 
     }
