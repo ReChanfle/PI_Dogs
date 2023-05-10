@@ -22,6 +22,7 @@ function App() {
   useEffect(()=>{
    
       dispatch(getDogs());
+      
   },[])
 
 

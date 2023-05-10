@@ -36,7 +36,6 @@ export const getDogs=()=>{
     const responsJson = await response.json();
 
     try{
-     
       dispatch({type: GET_DATA,payload:responsJson});
     }
     catch(err)
@@ -49,7 +48,7 @@ export const getDogs=()=>{
 }
 
 export const getDogsById=(id)=>{
-  console.log(id);
+ 
   return async function (dispatch)
   {
     const response = await fetch(`http://localhost:3001/dogs/${id}`);

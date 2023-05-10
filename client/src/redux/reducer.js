@@ -275,7 +275,7 @@ const reducer = (state = initialState, action) => {
                             // el paginado
                           
                            state.pagination = 1;
-                           state.filteredHome = state.filteredHome.filter((d)=>  {
+                           state.filteredHome = state.originalDog.filter((d)=>  {
                                 if(!Number(d.id)) 
                                     return d
                              });
