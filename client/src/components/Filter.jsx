@@ -3,7 +3,7 @@ import { useDispatch,useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { get_temperament,filterAPI,filterAZ,filterTemp,filterWeight } from '../redux/actions';
 
-export default function Filter({filter,dogs}){
+export default function Filter({filter}){
 
     useEffect(()=>{
       
@@ -18,8 +18,8 @@ export default function Filter({filter,dogs}){
     function handleTemps(event)
     {
         let dataFromSelect = event.target.value.split(",");
-          
-        dispatch(filterTemp({data: dataFromSelect[0],filter: filter,dogs: dogs}));
+          console.log(filter);
+        dispatch(filterTemp({data: dataFromSelect[0],filter: filter}));
     }
 
     function handleApiOrCustom(event)
