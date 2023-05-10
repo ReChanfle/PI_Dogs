@@ -233,29 +233,28 @@ const reducer = (state = initialState, action) => {
                         if(action.payload.data==="Custom")
                         {
                             state.pagination = 1;
-                            state.search_results = state.filteredSearch.filter((d)=>  {
+                            console.log(state.filteredSearch)
+                            state.filteredSearch = state.originalSearch.filter((d)=>  {
                           
                                 if(!Number(d.id)) 
                                         return d
                              });
                              return{
                                 ...state,
-                                search_results: [...state.search_results]
+                                search_results: [...state.filteredSearch]
                              }
                         }
-                       
-                       
                          if(action.payload.data==="API")
                          {
                            
-                            state.search_results =  state.filteredSearch.filter((d)=>  {
+                            state.filteredSearch =  state.originalSearch.filter((d)=>  {
                                 if(Number(d.id)) 
                                     return d
                              });
                           
                             return{
                                 ...state,
-                                search_results: [...  state.filteredSearch]
+                                search_results: [...state.filteredSearch]
                              }
                          }
                          
@@ -263,7 +262,7 @@ const reducer = (state = initialState, action) => {
                          {
                             return{
                                ...state,
-                               search_results: [... state.originalSearch]
+                               search_results: [...state.originalSearch]
                             }
                          }
                         
@@ -274,13 +273,13 @@ const reducer = (state = initialState, action) => {
                         {
                             //seteo el numero de pagina a 1 ya que si los resultados son menores que el valor anterior se rompe
                             // el paginado
-                            console.log(state.dogs);
+                          
                            state.pagination = 1;
-                            state.filteredHome = state.filteredHome.filter((d)=>  {
+                           state.filteredHome = state.filteredHome.filter((d)=>  {
                                 if(!Number(d.id)) 
                                     return d
                              });
-                             console.log(state.dogs);
+                           
                              return{
                                 ...state,
                                 dogs: [...state.filteredHome]
@@ -291,17 +290,16 @@ const reducer = (state = initialState, action) => {
                          if(action.payload.data==="API")
                          {
                           
-                            state.dogs = state.filteredHome.filter((d)=>  {
+                            state.filteredHome = state.originalDog.filter((d)=>  {
                                 if(Number(d.id)) 
                                 return d
                              });
                             
                              return{
                                 ...state,
-                                dogs: [... state.dogs]
+                                dogs: [...state.filteredHome]
                              }
                          }
-                       
                          if(action.payload.data==="All")
                          {
                             
@@ -333,7 +331,7 @@ const reducer = (state = initialState, action) => {
                         }
                          if(!action.payload.filter && action.payload.data!=="All")
                         {
-                            console.log(state.dogs);
+                           
                             state.pagination = 1;
                             state.dogs = state.filteredHome.filter((d)=>{
                                 if(d.temperament)

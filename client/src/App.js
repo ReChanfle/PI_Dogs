@@ -38,7 +38,7 @@ function App() {
 
   const navigate = useNavigate();
 
-    console.log(user);
+   
 
   useEffect(() => {
 

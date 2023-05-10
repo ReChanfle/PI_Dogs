@@ -26,13 +26,13 @@ export default function CreateDog()
     //estado local para enviar los datos al back
     const [data, setData] = useState({
         name: "",
-        life_spanMin: 0,
-        life_spanMax: 0,
+        life_spanMin: '',
+        life_spanMax: '',
         temperaments: [],
-        heightMin: 0,
-        heightMax: 0,
-        weightMin: 0,
-        weightMax: 0,
+        heightMin: '',
+        heightMax: '',
+        weightMin: '',
+        weightMax: '',
         img_url: ''
       });
 
@@ -92,13 +92,13 @@ export default function CreateDog()
        
             setData({
                 name: "",
-                life_spanMin: 0,
-                life_spanMax: 0,
+                life_spanMin: '',
+                life_spanMax: '',
                 temperaments: [],
-                heightMin: 0,
-                heightMax: 0,
-                weightMin: 0,
-                weightMax: 0,
+                heightMin: '',
+                heightMax: '',
+                weightMin: '',
+                weightMax: '',
                 img_url: ''
               })
               setTemps([]);
@@ -177,7 +177,7 @@ export default function CreateDog()
                         
                     <div className="input-container ic1">
                         <h1 className="subtitle">lifespan-max:</h1>
-                        <input className="input" placeholder="" name="life_spanMax" onChange={handleChange} value={data.life_spanMax} />
+                        <input className="input" placeholder="Pick a valid life span, only numbers" name="life_spanMax" onChange={handleChange} value={data.life_spanMax} />
                         {validate(data).life_spanMax ? <h1 className="messageValidation">Seems Good</h1> :<h1 className="messageValidation">Beetwen 1 and 99 and more than life-span-min</h1>}
                         </div>
 

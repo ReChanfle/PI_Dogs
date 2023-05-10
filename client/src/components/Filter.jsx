@@ -18,7 +18,7 @@ export default function Filter({filter}){
     function handleTemps(event)
     {
         let dataFromSelect = event.target.value.split(",");
-          console.log(filter);
+         
         dispatch(filterTemp({data: dataFromSelect[0],filter: filter}));
     }
 
