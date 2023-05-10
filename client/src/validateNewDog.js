@@ -18,9 +18,7 @@ export default function validate(data)
                 temperaments: 0,
                 allOk: false
         }
-                let test1 = Number(data.life_spanMin)
-                let test2 = Number(data.life_spanMax)
-                console.log( Number(data.life_spanMin)<Number(data.life_spanMax));
+              
           
         if(regexNickname.test(data.name) && data.name.length<40 && data.name.length>0 )  
         obj.name = true;

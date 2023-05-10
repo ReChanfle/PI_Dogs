@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import { add_nickname, savePage } from '../redux/actions.js';
+import { useEffect } from 'react';
 import SearchBar from './SearchBar.jsx';
 import '../styles/Nav.css';
 
 function Nav({onSearch,deleteSearch}) {
 
+  
       const dispatch = useDispatch();
 
       const user = useSelector((state)=> state.nickname);

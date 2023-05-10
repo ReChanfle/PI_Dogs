@@ -12,6 +12,15 @@ export default function Detail()
    
     const {id}= useParams();
 
+    useEffect(()=>{
+        document.title = 'PI-Dogs - Details';
+         
+      },[]);
+
+      useEffect(()=>{
+        return ()=>{document.title = 'PI-Dogs - Home';} 
+         
+      },[]);
 
     const dispatch = useDispatch();
 

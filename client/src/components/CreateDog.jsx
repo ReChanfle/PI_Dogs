@@ -2,12 +2,17 @@ import '../styles/CreateDog.css';
 import { useState,useEffect } from "react";
 import validate from '../validateNewDog';
 import { useDispatch,useSelector } from 'react-redux';
-import { get_temperament,post_dogs,resetCreateDog } from '../redux/actions';
+import { get_temperament,post_dogs,resetCreateDog,getDogs } from '../redux/actions';
 
 
 
 export default function CreateDog()
 {
+
+    useEffect(()=>{
+        document.title = 'PI-Dogs - Create Dog';
+         
+      },[]);
    
     const dispatch = useDispatch();
     
@@ -118,7 +123,11 @@ export default function CreateDog()
 
     function CleanForm()
     { 
-        if(postData.message=="Perro creado")   clean()
+        if(postData.message=="Perro creado") 
+        {
+            clean();
+            dispatch(getDogs());
+        }  
           
         setTimeout(() => {
             dispatch(resetCreateDog({}));

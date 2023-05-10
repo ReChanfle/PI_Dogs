@@ -1,5 +1,5 @@
 import '../styles/Form.css';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { add_nickname } from '../redux/actions';
 import { useDispatch } from 'react-redux';
 import {  useNavigate } from 'react-router-dom';
@@ -7,6 +7,16 @@ import validateForm from '../validation';
 
 export default function Form()
 {
+
+    useEffect(()=>{
+        document.title = 'PI-Dogs - Login';
+         
+      },[]);
+
+      useEffect(()=>{
+        return ()=>{document.title = 'PI-Dogs - Home';} 
+         
+      },[]);
 
     const [nickname,setNickname] = useState('');
 

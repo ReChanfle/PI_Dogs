@@ -1,8 +1,17 @@
 import '../styles/Detail.css';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 export default function About()
 {
+    useEffect(()=>{
+        document.title = 'PI-Dogs - About';
+         
+      },[]);
 
+      useEffect(()=>{
+        return ()=>{document.title = 'PI-Dogs - Home';} 
+         
+      },[]);
 
     const styleLogo = {
         width: '65px',

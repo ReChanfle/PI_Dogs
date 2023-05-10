@@ -20,7 +20,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    document.title = 'PI-Dogs';
+   
       dispatch(getDogs());
   },[])
 
