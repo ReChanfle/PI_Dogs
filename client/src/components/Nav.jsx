@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSelector,useDispatch } from 'react-redux';
 import { add_nickname, savePage } from '../redux/actions.js';
-import { useEffect } from 'react';
 import SearchBar from './SearchBar.jsx';
 import '../styles/Nav.css';
 
@@ -19,6 +18,7 @@ function Nav({onSearch,deleteSearch}) {
           dispatch(add_nickname(""));
         }
 
+         //funcion para setear la barra a responsive
       function responsiveNav() 
       {
         var x = document.getElementById("myTopnav");
@@ -49,7 +49,7 @@ function Nav({onSearch,deleteSearch}) {
 
     <Link to="/createdogs">New Dog</Link>
 
-    <Link to="/About">About</Link>
+    <Link to="/about">About</Link>
    
     
     <SearchBar onSearch={onSearch} />

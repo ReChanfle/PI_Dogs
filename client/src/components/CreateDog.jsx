@@ -13,6 +13,11 @@ export default function CreateDog()
         document.title = 'PI-Dogs - Create Dog';
          
       },[]);
+
+      useEffect(()=>{
+        return ()=>{document.title = 'PI-Dogs - Home';} 
+         
+      },[]);
    
     const dispatch = useDispatch();
     

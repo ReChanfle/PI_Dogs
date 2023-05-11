@@ -1,4 +1,4 @@
-const DogsModel = require('../models/dogs')
+
 const { Dogs, Temperaments} = require('../db');
 const Op = require('sequelize');
 

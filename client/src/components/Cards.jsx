@@ -1,5 +1,6 @@
 import Card from "./Card";
 import '../styles/Cards.css';
+import '../styles/Detail.css';
 import { useState,useEffect } from "react";
 import { useDispatch,useSelector } from "react-redux";
 import Paginate from './Paginate';
@@ -69,7 +70,11 @@ export default function Cards({showDogs}){
     return(
         <div className="cards-container">
             <div className="cards">
-            { test && test.map((d)=> {return <Card  key={d.id} d={d} />})}
+                {test.length>0 ? (test.map((d) => {
+                    return <Card key={d.id} d={d} />;})
+                    ) : (
+                    <div className="containerDetail cards-container"><h1 className="fontPage">No hay Resultados</h1></div>
+                )}
             </div>
             {<Paginate paginate={paginate} handleClick={handleClick}/>}
        

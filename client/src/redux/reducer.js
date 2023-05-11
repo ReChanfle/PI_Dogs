@@ -246,7 +246,7 @@ const reducer = (state = initialState, action) => {
                         }
                          if(action.payload.data==="API")
                          {
-                           
+                            state.pagination = 1;
                             state.filteredSearch =  state.originalSearch.filter((d)=>  {
                                 if(Number(d.id)) 
                                     return d
@@ -260,6 +260,7 @@ const reducer = (state = initialState, action) => {
                          
                          if(action.payload.data==="All")
                          {
+                            state.pagination = 1;
                             return{
                                ...state,
                                search_results: [...state.originalSearch]
