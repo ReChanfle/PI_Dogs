@@ -10,7 +10,6 @@ import CreateDog from './components/CreateDog';
 import Cards from './components/Cards';
 import Detail from './components/Detail';
 import Filter from './components/Filter';
-import Error from './components/Error';
 import { useDispatch, useSelector } from 'react-redux';
 import { getDogs } from './redux/actions';
 
@@ -82,7 +81,6 @@ function App() {
           {access ? <Nav    onSearch={onSearch} deleteSearch={deleteSearch} /> : null }
           
       <Routes>
-        <Route path="*" element={<Error  />} />
         <Route path="/login" element={<Form />} />
         <Route path="/about" element={<About />} />
         <Route path="/home" element={<><Filter filter={search_or_all} dogs={search_or_all ? searchDogs : dogs} /><Cards showDogs={search_or_all ? searchDogs : dogs} /></>} />
@@ -99,7 +97,7 @@ export default App;
 /* 
  <Route path="*" element={<Error />} />
  <Paginate filter={search_or_all}/>
-
+  <Route path="*" element={<Error  />} />
  return (
     <div className="App">
           {access ? <Nav   onSearch={onSearch} deleteSearch={deleteSearch} /> : null }
