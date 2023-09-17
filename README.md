@@ -9,7 +9,7 @@
 -  Afirmar y conectar los conceptos aprendidos en la carrera.
 -  Aprender mejores prácticas.
 -  Aprender y practicar el workflow de GIT.
--  Utilizar y practicar testing.
+-  Utilizar y practicar testing. 
 
 <br />
 
